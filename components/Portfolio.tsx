@@ -1,28 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram } from "lucide-react";
 import { ARTIST } from "@/lib/site";
 
-/**
- * Portfolio grid — currently displaying placeholder tiles with subject hints.
- *
- * To replace with real images:
- * 1. Drop JPGs into /public/portfolio/ named tattoo-01.jpg, tattoo-02.jpg, etc.
- * 2. Replace the PLACEHOLDER_ITEMS array below with real entries:
- *      { src: "/portfolio/tattoo-01.jpg", alt: "Realistic lion portrait" }
- * 3. Swap the placeholder div for an <img> or next/image in the map below.
- */
-const PLACEHOLDER_ITEMS = [
-  { label: "Portrait", subject: "Memorial portrait" },
-  { label: "Religious", subject: "Saint figure" },
-  { label: "Realism", subject: "Lion portrait" },
-  { label: "Portrait", subject: "Family member" },
-  { label: "Realism", subject: "Eye detail" },
-  { label: "Religious", subject: "Praying hands" },
-  { label: "Portrait", subject: "Greek statue" },
-  { label: "Realism", subject: "Animal portrait" },
-  { label: "Memorial", subject: "Tribute piece" },
+const PIECES = [
+  { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Black & gray realism tattoo by Julián Morales" },
+  { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Portrait realism piece by Julián Morales" },
+  { src: "/portfolio/tattoo-03.webp", w: 1600, h: 2071, alt: "Religious imagery tattoo, black and gray" },
+  { src: "/portfolio/tattoo-04.jpg",  w: 1080, h: 1440, alt: "Black & gray realism work in progress" },
+  { src: "/portfolio/tattoo-05.jpg",  w: 1080, h: 1440, alt: "Memorial portrait tattoo by Julián Morales" },
+  { src: "/portfolio/tattoo-06.jpeg", w: 384,  h: 699,  alt: "Realism detail by Julián Morales" },
+  { src: "/portfolio/tattoo-07.jpeg", w: 473,  h: 809,  alt: "Religious figure tattoo, black and gray" },
+  { src: "/portfolio/tattoo-08.jpeg", w: 388,  h: 642,  alt: "Portrait tattoo piece" },
+  { src: "/portfolio/tattoo-09.jpeg", w: 327,  h: 771,  alt: "Black & gray sleeve detail" },
 ];
 
 export default function Portfolio() {
@@ -45,8 +37,8 @@ export default function Portfolio() {
               Selected <span className="text-gold-gradient">work</span>.
             </h2>
             <p className="mt-5 text-brand-muted text-base sm:text-lg leading-relaxed max-w-xl">
-              A small selection. The full portfolio — including healed pieces
-              months after the session — lives on Instagram.
+              A curated selection of recent pieces. The full archive — including
+              healed work months after the session — lives on Instagram.
             </p>
           </div>
           <a
@@ -60,45 +52,63 @@ export default function Portfolio() {
           </a>
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-          {PLACEHOLDER_ITEMS.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+        {/* Masonry — preserves natural aspect ratios, no distortion */}
+        <div className="mt-12 columns-2 md:columns-3 gap-3 sm:gap-4 [column-fill:balance]">
+          {PIECES.map((p, i) => (
+            <motion.figure
+              key={p.src}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group relative aspect-[4/5] overflow-hidden rounded-xl border border-brand-gold/15 bg-gradient-to-br from-brand-charcoal via-brand-deep to-brand-black"
+              transition={{ duration: 0.55, delay: (i % 3) * 0.08 }}
+              className="group relative mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-xl border border-brand-gold/15 bg-brand-deep"
             >
-              {/* Placeholder content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
-                <div
-                  aria-hidden
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle at 30% 30%, rgba(212,175,55,0.15) 0%, transparent 60%)",
-                  }}
-                />
-                <span className="relative text-[10px] uppercase tracking-[0.3em] text-brand-gold">
-                  {item.label}
-                </span>
-                <span className="relative mt-3 font-display text-sm text-brand-muted">
-                  {item.subject}
-                </span>
-                <span className="relative mt-2 text-[10px] text-brand-dim italic">
-                  Image coming soon
-                </span>
-              </div>
+              <Image
+                src={p.src}
+                alt={p.alt}
+                width={p.w}
+                height={p.h}
+                sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 50vw"
+                className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+              />
 
-              {/* Subtle hover gold border */}
+              {/* Hover overlay with subtle gold gradient */}
               <div
                 aria-hidden
-                className="absolute inset-0 rounded-xl ring-1 ring-inset ring-transparent transition-all group-hover:ring-brand-gold/40"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 50%, rgba(10, 10, 10, 0.55) 100%)",
+                }}
               />
-            </motion.div>
+
+              {/* Hover ring */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-transparent transition-all duration-500 group-hover:ring-brand-gold/40"
+              />
+            </motion.figure>
           ))}
         </div>
+
+        {/* Bottom CTA strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+          className="mt-14 text-center"
+        >
+          <p className="text-brand-muted text-sm sm:text-base">
+            Want a piece in this style?{" "}
+            <a
+              href="#contact"
+              className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
+            >
+              Send me your idea →
+            </a>
+          </p>
+        </motion.div>
       </div>
     </section>
   );

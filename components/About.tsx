@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ARTIST } from "@/lib/site";
 
@@ -18,13 +19,70 @@ export default function About() {
       className="relative py-20 sm:py-28 border-t border-brand-gold/10"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left: copy */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left: portrait */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5"
+          >
+            <div className="relative">
+              {/* Glow halo */}
+              <div
+                aria-hidden
+                className="absolute -inset-4 rounded-[2rem] opacity-50 blur-2xl"
+                style={{
+                  background:
+                    "radial-gradient(circle at center, rgba(212, 175, 55, 0.3) 0%, transparent 70%)",
+                }}
+              />
+
+              {/* Image with gold rim */}
+              <div
+                className="relative rounded-2xl p-[1.5px]"
+                style={{
+                  background:
+                    "linear-gradient(140deg, rgba(232, 201, 122, 0.7) 0%, rgba(168, 139, 44, 0.3) 50%, rgba(232, 201, 122, 0.7) 100%)",
+                }}
+              >
+                <div className="relative overflow-hidden rounded-2xl bg-brand-deep">
+                  <Image
+                    src="/about/julian-portrait.webp"
+                    alt="Julián Morales — Black & Gray Realism Tattoo Artist"
+                    width={1600}
+                    height={2034}
+                    sizes="(min-width: 1024px) 40vw, 90vw"
+                    priority
+                    className="block h-auto w-full"
+                  />
+                  {/* Subtle bottom fade */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/30 to-transparent"
+                  />
+                </div>
+              </div>
+
+              {/* Decorative corner accents */}
+              <div
+                aria-hidden
+                className="absolute -top-2 -right-2 h-3 w-3 rounded-full bg-brand-gold shadow-gold"
+              />
+              <div
+                aria-hidden
+                className="absolute -bottom-2 -left-2 h-2 w-2 rounded-full bg-brand-gold-light shadow-gold"
+              />
+            </div>
+          </motion.div>
+
+          {/* Right: copy + stats */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             className="lg:col-span-7"
           >
             <div className="eyebrow mb-4">About</div>
@@ -33,10 +91,13 @@ export default function About() {
               <span className="text-gold-gradient">made with intention</span>.
             </h2>
 
-            <div className="mt-8 space-y-5 text-brand-muted leading-relaxed text-base sm:text-lg">
+            <div className="mt-7 space-y-5 text-brand-muted leading-relaxed text-base sm:text-lg">
               <p>
                 I&apos;m Julián Morales, a black &amp; gray realism tattoo artist
-                with <span className="text-brand-cream">{ARTIST.stats.yearsExperience} years</span>{" "}
+                with{" "}
+                <span className="text-brand-cream">
+                  {ARTIST.stats.yearsExperience} years
+                </span>{" "}
                 of experience and over{" "}
                 <span className="text-brand-cream">
                   {ARTIST.stats.healedPieces} healed pieces
@@ -52,15 +113,14 @@ export default function About() {
               </p>
               <p>
                 I work by appointment only at{" "}
-                <span className="text-brand-cream">
-                  {ARTIST.studio.name}
-                </span>{" "}
-                in San Jose, and I attend clients in{" "}
+                <span className="text-brand-cream">{ARTIST.studio.name}</span>{" "}
+                in San Jose, in{" "}
                 <span className="text-brand-cream">English and Spanish</span>.
               </p>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-2">
+            {/* Specialty pills */}
+            <div className="mt-8 flex flex-wrap gap-2">
               {SPECIALTIES.map((s) => (
                 <span
                   key={s}
@@ -70,45 +130,13 @@ export default function About() {
                 </span>
               ))}
             </div>
-          </motion.div>
 
-          {/* Right: stats card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="lg:col-span-5"
-          >
-            <div className="card-dark rounded-2xl p-7 sm:p-9">
-              <div className="space-y-6">
-                <Stat
-                  value={ARTIST.stats.yearsExperience}
-                  label="Years Specializing in Black &amp; Gray"
-                />
-                <div className="divider-gold" />
-                <Stat
-                  value={ARTIST.stats.healedPieces}
-                  label="Healed Pieces Documented"
-                />
-                <div className="divider-gold" />
-                <Stat value="100%" label="Custom Drawn — No Flash" />
-                <div className="divider-gold" />
-                <Stat value="EN / ES" label="Bilingual Consultation" />
-              </div>
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-brand-gold/20 bg-brand-deep/40 p-5 text-sm text-brand-muted">
-              <span className="text-brand-gold">✦</span>{" "}
-              Verified on Instagram —{" "}
-              <a
-                href={ARTIST.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-brand-cream underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold"
-              >
-                {ARTIST.social.instagramHandle}
-              </a>
+            {/* Inline stats row */}
+            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-4 border-t border-brand-gold/15 pt-8">
+              <Stat value={ARTIST.stats.yearsExperience} label="Years" />
+              <Stat value={ARTIST.stats.healedPieces} label="Healed" />
+              <Stat value="100%" label="Custom" />
+              <Stat value="EN/ES" label="Bilingual" />
             </div>
           </motion.div>
         </div>
@@ -120,13 +148,12 @@ export default function About() {
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <div className="font-display text-4xl sm:text-5xl font-bold text-gold-gradient leading-none">
+      <div className="font-display text-2xl sm:text-3xl font-bold text-gold-gradient leading-none">
         {value}
       </div>
-      <div
-        className="mt-2 text-xs uppercase tracking-wider text-brand-muted"
-        dangerouslySetInnerHTML={{ __html: label }}
-      />
+      <div className="mt-2 text-[10px] sm:text-xs uppercase tracking-widest text-brand-muted">
+        {label}
+      </div>
     </div>
   );
 }
