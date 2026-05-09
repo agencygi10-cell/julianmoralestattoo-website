@@ -51,10 +51,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section
-      id="faq"
-      className="relative py-20 sm:py-28 border-t border-brand-gold/10"
-    >
+    <section className="relative py-16 sm:py-24 border-t border-brand-gold/10">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -63,7 +60,7 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
         >
           <div className="eyebrow mb-4">FAQ</div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-brand-text">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-white">
             The questions <span className="text-gold-gradient">everyone asks</span>.
           </h2>
         </motion.div>
@@ -86,7 +83,7 @@ export default function FAQ() {
                   className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-display text-base sm:text-lg font-semibold text-brand-cream">
+                  <span className="font-display text-base sm:text-lg font-semibold text-white">
                     {item.q}
                   </span>
                   <ChevronDown
@@ -105,7 +102,7 @@ export default function FAQ() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-5 pr-12 text-sm sm:text-base text-brand-muted leading-relaxed sm:px-6 sm:pb-6">
+                      <p className="px-5 pb-5 pr-12 text-sm sm:text-base text-white/70 leading-relaxed sm:px-6 sm:pb-6">
                         {item.a}
                       </p>
                     </motion.div>

@@ -14,10 +14,7 @@ const SPECIALTIES = [
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className="relative py-20 sm:py-28 border-t border-brand-gold/10"
-    >
+    <section className="relative pt-32 pb-20 lg:pt-36 lg:pb-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left: portrait */}
@@ -57,7 +54,6 @@ export default function About() {
                     priority
                     className="block h-auto w-full"
                   />
-                  {/* Subtle bottom fade */}
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/30 to-transparent"
@@ -65,7 +61,6 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Decorative corner accents */}
               <div
                 aria-hidden
                 className="absolute -top-2 -right-2 h-3 w-3 rounded-full bg-brand-gold shadow-gold"
@@ -77,7 +72,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right: copy + stats */}
+          {/* Right: copy */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -86,22 +81,18 @@ export default function About() {
             className="lg:col-span-7"
           >
             <div className="eyebrow mb-4">About</div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-brand-text">
+            <h1 className="font-display text-4xl sm:text-6xl font-bold leading-tight text-white">
               Permanent art,{" "}
               <span className="text-gold-gradient">made with intention</span>.
-            </h2>
+            </h1>
 
-            <div className="mt-7 space-y-5 text-brand-muted leading-relaxed text-base sm:text-lg">
+            <div className="mt-7 space-y-5 text-white/70 leading-relaxed text-base sm:text-lg">
               <p>
                 I&apos;m Julián Morales, a black &amp; gray realism tattoo artist
                 with{" "}
-                <span className="text-brand-cream">
-                  {ARTIST.stats.yearsExperience} years
-                </span>{" "}
+                <span className="text-white">{ARTIST.stats.yearsExperience} years</span>{" "}
                 of experience and over{" "}
-                <span className="text-brand-cream">
-                  {ARTIST.stats.healedPieces} healed pieces
-                </span>{" "}
+                <span className="text-white">{ARTIST.stats.healedPieces} healed pieces</span>{" "}
                 documented on my Instagram.
               </p>
               <p>
@@ -113,13 +104,11 @@ export default function About() {
               </p>
               <p>
                 I work by appointment only at{" "}
-                <span className="text-brand-cream">{ARTIST.studio.name}</span>{" "}
-                in San Jose, in{" "}
-                <span className="text-brand-cream">English and Spanish</span>.
+                <span className="text-white">{ARTIST.studio.name}</span> in San
+                Jose, in <span className="text-white">English and Spanish</span>.
               </p>
             </div>
 
-            {/* Specialty pills */}
             <div className="mt-8 flex flex-wrap gap-2">
               {SPECIALTIES.map((s) => (
                 <span
@@ -131,7 +120,6 @@ export default function About() {
               ))}
             </div>
 
-            {/* Inline stats row */}
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-4 border-t border-brand-gold/15 pt-8">
               <Stat value={ARTIST.stats.yearsExperience} label="Years" />
               <Stat value={ARTIST.stats.healedPieces} label="Healed" />
@@ -151,7 +139,7 @@ function Stat({ value, label }: { value: string; label: string }) {
       <div className="font-display text-2xl sm:text-3xl font-bold text-gold-gradient leading-none">
         {value}
       </div>
-      <div className="mt-2 text-[10px] sm:text-xs uppercase tracking-widest text-brand-muted">
+      <div className="mt-2 text-[10px] sm:text-xs uppercase tracking-widest text-white/50">
         {label}
       </div>
     </div>

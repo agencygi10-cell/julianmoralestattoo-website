@@ -29,7 +29,7 @@ const items = [
 
 export default function TrustStrip() {
   return (
-    <section className="relative border-y border-brand-gold/15 bg-brand-deep/60 py-10 sm:py-12">
+    <section className="relative border-y border-brand-gold/15 bg-brand-deep/50 py-10 sm:py-12 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {items.map((it, i) => {
@@ -47,10 +47,10 @@ export default function TrustStrip() {
                   <Icon size={18} />
                 </div>
                 <div className="min-w-0">
-                  <div className="font-display text-sm sm:text-base font-semibold text-brand-cream truncate">
+                  <div className="font-display text-sm sm:text-base font-semibold text-white truncate">
                     {it.label}
                   </div>
-                  <div className="text-xs text-brand-dim truncate">{it.sub}</div>
+                  <div className="text-xs text-white/50 truncate">{it.sub}</div>
                 </div>
               </motion.div>
             );

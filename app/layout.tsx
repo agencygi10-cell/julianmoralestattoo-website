@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Cinzel } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import BackgroundFX from "@/components/BackgroundFX";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,9 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
-  icons: {
-    icon: "/favicon.svg",
-  },
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({
@@ -47,7 +48,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${cinzel.variable}`}>
-      <body>{children}</body>
+      <body>
+        <BackgroundFX />
+        <Navbar />
+        <div className="relative z-10">{children}</div>
+        <Footer />
+      </body>
     </html>
   );
 }

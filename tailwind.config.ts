@@ -8,18 +8,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Strict palette: black, white, gold. Grays are opacities of white.
         brand: {
           black: "#0a0a0a",
-          deep: "#141414",
-          charcoal: "#1f1f1f",
-          ash: "#2a2a2a",
+          deep: "#101010",
+          charcoal: "#181818",
           gold: "#D4AF37",
           "gold-light": "#E8C97A",
           "gold-dark": "#A88B2C",
-          cream: "#F5E9C8",
-          text: "#E5E5E5",
-          muted: "#A0A0A0",
-          dim: "#707070",
         },
       },
       fontFamily: {
@@ -33,8 +29,6 @@ const config: Config = {
       backgroundImage: {
         "gold-gradient":
           "linear-gradient(135deg, #E8C97A 0%, #D4AF37 50%, #A88B2C 100%)",
-        "gold-radial":
-          "radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%)",
       },
       boxShadow: {
         gold: "0 0 30px -8px rgba(212, 175, 55, 0.4)",
@@ -42,7 +36,8 @@ const config: Config = {
       },
       animation: {
         "fade-up": "fadeUp 0.8s ease-out forwards",
-        "shimmer": "shimmer 3s ease-in-out infinite",
+        shimmer: "shimmer 3s ease-in-out infinite",
+        "mesh-shift": "meshShift 20s ease-in-out infinite",
       },
       keyframes: {
         fadeUp: {
@@ -52,6 +47,11 @@ const config: Config = {
         shimmer: {
           "0%, 100%": { opacity: "0.4" },
           "50%": { opacity: "1" },
+        },
+        meshShift: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(2%, -3%) scale(1.05)" },
+          "66%": { transform: "translate(-2%, 2%) scale(0.97)" },
         },
       },
     },

@@ -1,28 +1,18 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Instagram } from "lucide-react";
 import { ARTIST } from "@/lib/site";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100svh] overflow-hidden flex items-center pt-28 pb-16 lg:pt-36 lg:pb-20">
-      {/* Background layers */}
-      <div aria-hidden className="absolute inset-0 grid-bg opacity-70" />
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 60% at 30% 30%, rgba(212, 175, 55, 0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 70%)",
-        }}
-      />
-      <div className="grain" aria-hidden />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+    <section className="relative min-h-[100svh] flex items-center pt-28 pb-12 lg:pt-36 lg:pb-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* LEFT — typography */}
-          <div className="lg:col-span-7 text-center lg:text-left">
+          <div className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -38,7 +28,7 @@ export default function Hero() {
               transition={{ duration: 0.9, delay: 0.1 }}
               className="mt-6 font-display text-5xl sm:text-7xl lg:text-[6.5rem] font-bold tracking-wide leading-[0.95]"
             >
-              <span className="block text-brand-text">JULIÁN</span>
+              <span className="block text-white">JULIÁN</span>
               <span className="block text-gold-gradient">MORALES</span>
             </motion.h1>
 
@@ -53,11 +43,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-7 max-w-xl mx-auto lg:mx-0 text-base sm:text-lg text-brand-muted leading-relaxed"
+              className="mt-7 max-w-xl mx-auto lg:mx-0 text-base sm:text-lg text-white/70 leading-relaxed"
             >
-              Custom <span className="text-brand-cream">black &amp; gray realism</span> —
+              Custom <span className="text-white">black &amp; gray realism</span> —
               portraits, religious imagery, and memorial pieces. Based at{" "}
-              <span className="text-brand-cream">Premium Clan Tattoo Studio</span>, San Jose.
+              <span className="text-white">Premium Clan Tattoo Studio</span>, San Jose.
             </motion.p>
 
             <motion.div
@@ -66,8 +56,8 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.7 }}
               className="mt-10 flex flex-col sm:flex-row items-center lg:items-start gap-4 justify-center lg:justify-start"
             >
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 className="btn-gold group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
               >
                 Book a Consultation
@@ -75,7 +65,7 @@ export default function Hero() {
                   size={16}
                   className="transition-transform group-hover:translate-x-1"
                 />
-              </a>
+              </Link>
               <a
                 href={ARTIST.social.instagram}
                 target="_blank"
@@ -91,20 +81,20 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1 }}
-              className="mt-10 text-xs uppercase tracking-[0.3em] text-brand-dim"
+              className="mt-10 text-xs uppercase tracking-[0.3em] text-white/40"
             >
               By appointment only · English &amp; Español
             </motion.p>
           </div>
 
-          {/* RIGHT — vertical video in phone frame */}
+          {/* RIGHT — featured tattoo piece (Christ portrait) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="lg:col-span-5 flex justify-center"
+            className="lg:col-span-5 flex justify-center order-1 lg:order-2"
           >
-            <PhoneFrame />
+            <FeaturedFrame />
           </motion.div>
         </div>
       </div>
@@ -112,7 +102,7 @@ export default function Hero() {
   );
 }
 
-function PhoneFrame() {
+function FeaturedFrame() {
   return (
     <div className="relative">
       {/* Glow halo */}
@@ -127,31 +117,34 @@ function PhoneFrame() {
 
       {/* Outer gold rim */}
       <div
-        className="relative mx-auto rounded-[2.4rem] p-[2px] shadow-gold-lg"
+        className="relative mx-auto rounded-2xl p-[1.5px] shadow-gold-lg"
         style={{
-          width: "min(280px, 75vw)",
+          width: "min(360px, 80vw)",
           background:
             "linear-gradient(140deg, rgba(232, 201, 122, 0.9) 0%, rgba(168, 139, 44, 0.5) 50%, rgba(232, 201, 122, 0.9) 100%)",
         }}
       >
-        {/* Inner phone body */}
-        <div className="relative overflow-hidden rounded-[2.3rem] bg-brand-black">
-          <div className="relative aspect-[9/16] w-full">
-            <video
-              src="/videos/home.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              aria-label="Julian Morales tattoo work showcase"
-              className="absolute inset-0 h-full w-full object-cover"
+        {/* Inner frame */}
+        <div className="relative overflow-hidden rounded-2xl bg-brand-black">
+          <div className="relative aspect-[4/5] w-full">
+            <Image
+              src="/portfolio/tattoo-01.webp"
+              alt="Black & gray realism tattoo by Julián Morales — Christ portrait"
+              fill
+              priority
+              sizes="(min-width: 1024px) 360px, 80vw"
+              className="object-cover"
             />
             {/* Subtle bottom gradient for depth */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent"
             />
+
+            {/* Caption pill */}
+            <div className="absolute left-3 bottom-3 rounded-full border border-brand-gold/40 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-brand-gold backdrop-blur-sm">
+              Featured Work
+            </div>
           </div>
         </div>
       </div>

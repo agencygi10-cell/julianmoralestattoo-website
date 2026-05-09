@@ -7,7 +7,7 @@ const STEPS = [
   {
     icon: MessageSquare,
     title: "Reach Out",
-    body: "Message me via WhatsApp or this form with your idea, references, and approximate placement and size. I respond within 48 hours.",
+    body: "Message me via WhatsApp or the contact form with your idea, references, and approximate placement and size. I respond within 48 hours.",
   },
   {
     icon: FileText,
@@ -28,10 +28,7 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <section
-      id="process"
-      className="relative py-20 sm:py-28 border-t border-brand-gold/10"
-    >
+    <section className="relative py-16 sm:py-24 border-t border-brand-gold/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -41,11 +38,11 @@ export default function Process() {
           className="max-w-3xl"
         >
           <div className="eyebrow mb-4">The Process</div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-brand-text">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-white">
             From first message to{" "}
             <span className="text-gold-gradient">healed piece</span>.
           </h2>
-          <p className="mt-5 text-brand-muted text-base sm:text-lg leading-relaxed">
+          <p className="mt-5 text-white/60 text-base sm:text-lg leading-relaxed">
             A clear path so you know exactly what to expect — no surprises,
             no rushed decisions.
           </p>
@@ -63,7 +60,6 @@ export default function Process() {
                 transition={{ duration: 0.55, delay: i * 0.1 }}
                 className="card-dark group relative rounded-2xl p-7 transition-all hover:border-brand-gold/30"
               >
-                {/* Step number */}
                 <div className="absolute -top-3 right-5 rounded-full border border-brand-gold/30 bg-brand-black px-3 py-1 text-[11px] uppercase tracking-widest text-brand-gold">
                   Step {i + 1}
                 </div>
@@ -72,10 +68,10 @@ export default function Process() {
                   <Icon size={22} />
                 </div>
 
-                <h3 className="mt-5 font-display text-xl font-semibold text-brand-cream">
+                <h3 className="mt-5 font-display text-xl font-semibold text-white">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm text-brand-muted leading-relaxed">
+                <p className="mt-3 text-sm text-white/60 leading-relaxed">
                   {step.body}
                 </p>
               </motion.div>

@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Footer from "@/components/Footer";
-import Logo from "@/components/Logo";
 import { ARTIST, FULL_ADDRESS, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,34 +11,20 @@ export default function TermsPage() {
   const PRIVACY_URL = `${SITE_URL}/privacy`;
 
   return (
-    <main className="relative min-h-screen">
-      <header className="border-b border-brand-gold/10 bg-brand-black/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-          <Link href="/" aria-label="Back to home">
-            <Logo />
-          </Link>
-          <Link
-            href="/"
-            className="text-sm text-brand-muted transition-colors hover:text-brand-gold"
-          >
-            ← Back to home
-          </Link>
-        </div>
-      </header>
-
-      <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <main>
+      <article className="mx-auto max-w-3xl px-4 pt-32 pb-20 sm:px-6 lg:px-8 lg:pt-36">
         <div className="eyebrow mb-3">Legal</div>
-        <h1 className="font-display text-3xl sm:text-5xl font-bold text-brand-text">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold text-white">
           Terms of Service
         </h1>
-        <p className="mt-3 text-brand-muted">
+        <p className="mt-3 text-white/60">
           {ARTIST.legalName}
           <br />
           <span className="text-sm">Effective Date: January 1, 2026</span>
         </p>
 
-        <div className="mt-10 space-y-7 text-brand-text/90 leading-relaxed">
-          <h2 className="font-display text-2xl font-semibold text-brand-cream">
+        <div className="mt-10 space-y-7 text-white/85 leading-relaxed">
+          <h2 className="font-display text-2xl font-semibold text-white">
             SMS Messaging Terms &amp; Compliance
           </h2>
 
@@ -170,7 +153,7 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <h2 className="font-display text-2xl font-semibold text-brand-cream pt-6">
+          <h2 className="font-display text-2xl font-semibold text-white pt-6">
             General Terms
           </h2>
 
@@ -261,21 +244,19 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <p className="pt-4 text-brand-muted italic">
+          <p className="pt-4 text-white/60 italic">
             By using our website and services, you consent to these Terms of
             Service.
           </p>
         </div>
       </article>
 
-      <Footer />
-
       <style>{`
         .legal-list {
           list-style: disc;
           padding-left: 1.5rem;
           margin: 0.75rem 0;
-          color: rgba(229, 229, 229, 0.85);
+          color: rgba(255, 255, 255, 0.85);
         }
         .legal-list li { margin: 0.4rem 0; }
       `}</style>
@@ -286,10 +267,10 @@ export default function TermsPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h3 className="font-display text-xl font-semibold text-brand-cream mb-3 mt-6">
+      <h3 className="font-display text-xl font-semibold text-white mb-3 mt-6">
         {title}
       </h3>
-      <div className="space-y-3 text-brand-text/85">{children}</div>
+      <div className="space-y-3 text-white/85">{children}</div>
     </section>
   );
 }

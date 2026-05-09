@@ -21,28 +21,28 @@ const TIKTOK_ICON = (
 );
 
 const NAV = [
-  { label: "About", href: "/#about" },
-  { label: "Process", href: "/#process" },
-  { label: "Portfolio", href: "/#portfolio" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-brand-gold/15 bg-brand-deep/60 py-14">
+    <footer className="relative z-10 border-t border-brand-gold/15 bg-brand-deep/70 py-14 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
             <Logo />
-            <p className="mt-5 max-w-sm text-sm text-brand-muted leading-relaxed">
+            <p className="mt-5 max-w-sm text-sm text-white/60 leading-relaxed">
               Black &amp; gray realism tattoo artist. Custom portraits,
               religious imagery, and memorial pieces. By appointment only —
               English &amp; Español.
             </p>
-            <div className="mt-5 text-sm text-brand-muted">
-              <div className="text-brand-cream">{ARTIST.studio.name}</div>
+            <div className="mt-5 text-sm text-white/60">
+              <div className="text-white">{ARTIST.studio.name}</div>
               <div>{FULL_ADDRESS}</div>
             </div>
           </div>
@@ -54,12 +54,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {NAV.map((l) => (
                 <li key={l.href}>
-                  <a
+                  <Link
                     href={l.href}
-                    className="text-sm text-brand-muted transition-colors hover:text-brand-gold"
+                    className="text-sm text-white/60 transition-colors hover:text-brand-gold"
                   >
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -69,7 +69,7 @@ export default function Footer() {
             <div className="text-xs uppercase tracking-widest text-brand-gold mb-4">
               Contact
             </div>
-            <ul className="space-y-2.5 text-sm text-brand-muted">
+            <ul className="space-y-2.5 text-sm text-white/60">
               <li>
                 <a
                   href={`mailto:${ARTIST.email}`}
@@ -112,19 +112,19 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-brand-gold/10 pt-6 sm:flex-row">
-          <p className="text-xs text-brand-dim">
+          <p className="text-xs text-white/40">
             © {year} {ARTIST.legalName}. All rights reserved.
           </p>
           <div className="flex items-center gap-5 text-xs">
             <Link
               href="/privacy"
-              className="text-brand-muted transition-colors hover:text-brand-gold"
+              className="text-white/60 transition-colors hover:text-brand-gold"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-brand-muted transition-colors hover:text-brand-gold"
+              className="text-white/60 transition-colors hover:text-brand-gold"
             >
               Terms of Service
             </Link>

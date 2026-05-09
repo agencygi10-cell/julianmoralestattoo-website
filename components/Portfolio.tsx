@@ -1,113 +1,112 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Instagram } from "lucide-react";
+import { ArrowRight, Instagram } from "lucide-react";
 import { ARTIST } from "@/lib/site";
 
-const PIECES = [
-  { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Black & gray realism tattoo by Julián Morales" },
-  { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Portrait realism piece by Julián Morales" },
-  { src: "/portfolio/tattoo-03.webp", w: 1600, h: 2071, alt: "Religious imagery tattoo, black and gray" },
-  { src: "/portfolio/tattoo-04.jpg",  w: 1080, h: 1440, alt: "Black & gray realism work in progress" },
-  { src: "/portfolio/tattoo-05.jpg",  w: 1080, h: 1440, alt: "Memorial portrait tattoo by Julián Morales" },
-  { src: "/portfolio/tattoo-06.jpeg", w: 384,  h: 699,  alt: "Realism detail by Julián Morales" },
-  { src: "/portfolio/tattoo-07.jpeg", w: 473,  h: 809,  alt: "Religious figure tattoo, black and gray" },
-  { src: "/portfolio/tattoo-08.jpeg", w: 388,  h: 642,  alt: "Portrait tattoo piece" },
-  { src: "/portfolio/tattoo-09.jpeg", w: 327,  h: 771,  alt: "Black & gray sleeve detail" },
+/**
+ * Portfolio — curated selection of best pieces. Selecting 6 of the
+ * highest-resolution / strongest images for the showcase. Full archive
+ * lives at /gallery.
+ */
+const FEATURED = [
+  { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Christ portrait — black & gray realism", tag: "Religious" },
+  { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Realism portrait piece", tag: "Portrait" },
+  { src: "/portfolio/tattoo-03.webp", w: 1600, h: 2071, alt: "Religious imagery, black & gray", tag: "Religious" },
+  { src: "/portfolio/tattoo-04.jpg",  w: 1080, h: 1440, alt: "Black & gray realism work", tag: "Realism" },
+  { src: "/portfolio/tattoo-05.jpg",  w: 1080, h: 1440, alt: "Memorial portrait by Julián Morales", tag: "Memorial" },
+  { src: "/portfolio/tattoo-07.jpeg", w: 473,  h: 809,  alt: "Religious figure tattoo", tag: "Religious" },
 ];
 
 export default function Portfolio() {
   return (
-    <section
-      id="portfolio"
-      className="relative py-20 sm:py-28 border-t border-brand-gold/10"
-    >
+    <section className="relative pt-32 pb-20 lg:pt-36 lg:pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 max-w-5xl"
+          className="max-w-3xl"
         >
-          <div>
-            <div className="eyebrow mb-4">Portfolio</div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-brand-text">
-              Selected <span className="text-gold-gradient">work</span>.
-            </h2>
-            <p className="mt-5 text-brand-muted text-base sm:text-lg leading-relaxed max-w-xl">
-              A curated selection of recent pieces. The full archive — including
-              healed work months after the session — lives on Instagram.
-            </p>
-          </div>
-          <a
-            href={ARTIST.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold self-start sm:self-end"
-          >
-            <Instagram size={16} />
-            See full portfolio
-          </a>
+          <div className="eyebrow mb-4">Portfolio</div>
+          <h1 className="font-display text-4xl sm:text-6xl font-bold leading-tight text-white">
+            Selected <span className="text-gold-gradient">work</span>.
+          </h1>
+          <p className="mt-5 text-white/60 text-base sm:text-lg leading-relaxed">
+            A curated selection of pieces I&apos;m proud of — the strongest
+            examples of the realism I do every day. The full archive lives in
+            the <Link href="/gallery" className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light">Gallery</Link>{" "}and on Instagram.
+          </p>
         </motion.div>
 
-        {/* Masonry — preserves natural aspect ratios, no distortion */}
-        <div className="mt-12 columns-2 md:columns-3 gap-3 sm:gap-4 [column-fill:balance]">
-          {PIECES.map((p, i) => (
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {FEATURED.map((p, i) => (
             <motion.figure
               key={p.src}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.55, delay: (i % 3) * 0.08 }}
-              className="group relative mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-xl border border-brand-gold/15 bg-brand-deep"
+              className="group relative"
             >
-              <Image
-                src={p.src}
-                alt={p.alt}
-                width={p.w}
-                height={p.h}
-                sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 50vw"
-                className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-
-              {/* Hover overlay with subtle gold gradient */}
               <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="relative rounded-2xl p-[1px] transition-all duration-500"
                 style={{
                   background:
-                    "linear-gradient(180deg, transparent 50%, rgba(10, 10, 10, 0.55) 100%)",
+                    "linear-gradient(140deg, rgba(232, 201, 122, 0.4) 0%, rgba(168, 139, 44, 0.15) 50%, rgba(232, 201, 122, 0.4) 100%)",
                 }}
-              />
-
-              {/* Hover ring */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-transparent transition-all duration-500 group-hover:ring-brand-gold/40"
-              />
+              >
+                <div className="relative overflow-hidden rounded-2xl bg-brand-deep">
+                  <div className="relative aspect-[4/5] w-full">
+                    <Image
+                      src={p.src}
+                      alt={p.alt}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                    {/* Bottom gradient */}
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+                    />
+                    {/* Tag pill */}
+                    <div className="absolute left-3 bottom-3 rounded-full border border-brand-gold/40 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-brand-gold backdrop-blur-sm">
+                      {p.tag}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.figure>
           ))}
         </div>
 
-        {/* Bottom CTA strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.6 }}
-          className="mt-14 text-center"
+          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <p className="text-brand-muted text-sm sm:text-base">
-            Want a piece in this style?{" "}
-            <a
-              href="#contact"
-              className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
-            >
-              Send me your idea →
-            </a>
-          </p>
+          <Link
+            href="/gallery"
+            className="btn-gold group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold"
+          >
+            See full Gallery
+            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+          </Link>
+          <a
+            href={ARTIST.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold"
+          >
+            <Instagram size={16} />
+            View Instagram
+          </a>
         </motion.div>
       </div>
     </section>

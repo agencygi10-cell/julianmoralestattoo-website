@@ -23,11 +23,10 @@ const PILLARS = [
 
 export default function Guarantee() {
   return (
-    <section className="relative py-20 sm:py-28 border-t border-brand-gold/10">
-      {/* Subtle gold radial */}
+    <section className="relative py-16 sm:py-24 border-t border-brand-gold/10">
       <div
         aria-hidden
-        className="absolute inset-0 opacity-50"
+        className="absolute inset-0 opacity-50 pointer-events-none"
         style={{
           background:
             "radial-gradient(ellipse 60% 50% at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 70%)",
@@ -43,10 +42,10 @@ export default function Guarantee() {
           className="text-center max-w-3xl mx-auto"
         >
           <div className="eyebrow mb-4">My Commitment</div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-brand-text">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-white">
             The <span className="text-gold-gradient">Black Ink Guarantee</span>.
           </h2>
-          <p className="mt-5 text-brand-muted text-base sm:text-lg leading-relaxed">
+          <p className="mt-5 text-white/60 text-base sm:text-lg leading-relaxed">
             A tattoo is permanent — your peace of mind shouldn&apos;t depend
             on hope. Three commitments that take the risk out of the decision.
           </p>
@@ -67,10 +66,10 @@ export default function Guarantee() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold/30 to-brand-gold/5 border border-brand-gold/40 text-brand-gold">
                   <Icon size={24} />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-brand-cream">
+                <h3 className="mt-5 font-display text-lg font-semibold text-white">
                   {p.title}
                 </h3>
-                <p className="mt-3 text-sm text-brand-muted leading-relaxed">
+                <p className="mt-3 text-sm text-white/60 leading-relaxed">
                   {p.body}
                 </p>
               </motion.div>
