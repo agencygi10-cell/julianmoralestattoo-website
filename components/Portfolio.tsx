@@ -10,10 +10,8 @@ import { ARTIST } from "@/lib/site";
  * Portfolio — full archive in masonry layout. CSS columns preserve each
  * piece's natural aspect ratio (no distortion, no forced cropping).
  *
- * To add new pieces:
- *   1. Drop the file in /public/portfolio/
- *   2. Append an entry to ITEMS below with src + width + height + alt
- *   3. For videos use { type: "video", src, w, h, alt }
+ * Mixed image + video tiles. Videos autoplay loop muted inline so they
+ * feel alive but don't dominate.
  */
 type ImageItem = {
   type?: "image";
@@ -31,17 +29,28 @@ type VideoItem = {
 };
 type Item = ImageItem | VideoItem;
 
+// Interleaved order — mixing new and existing pieces so the masonry
+// reads with variety instead of "new at the end".
 const ITEMS: Item[] = [
-  { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Christ portrait — black & gray realism" },
-  { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Realism portrait by Julián Morales" },
-  { src: "/portfolio/tattoo-03.webp", w: 1600, h: 2071, alt: "Religious imagery, black & gray" },
-  { src: "/portfolio/tattoo-04.jpg",  w: 1080, h: 1440, alt: "Black & gray realism work" },
+  { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Christ portrait — black & gray realism by Julián Morales" },
+  { src: "/portfolio/tattoo-10.jpg",  w: 1350, h: 1800, alt: "Lion and rose sleeve — black & gray realism" },
+  { src: "/portfolio/tattoo-18.jpg",  w: 1350, h: 1800, alt: "Spartan helmet full sleeve — black & gray realism" },
+  { type: "video", src: "/videos/portfolio-jesus.mp4", w: 720, h: 1280, alt: "Process clip — Christ tattoo by Julián Morales" },
+  { src: "/portfolio/tattoo-15.jpg",  w: 1350, h: 1800, alt: "Medusa with serpents — black & gray realism" },
+  { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Realism portrait piece by Julián Morales" },
+  { src: "/portfolio/tattoo-11.jpg",  w: 1350, h: 1800, alt: "Black & gray realism piece by Julián Morales" },
+  { src: "/portfolio/tattoo-03.webp", w: 1600, h: 2071, alt: "Religious imagery — black & gray" },
+  { src: "/portfolio/tattoo-12.jpg",  w: 1350, h: 1800, alt: "Black & gray realism work" },
+  { src: "/portfolio/tattoo-16.jpg",  w: 1383, h: 1800, alt: "Realism detail by Julián Morales" },
+  { src: "/portfolio/tattoo-04.jpg",  w: 1080, h: 1440, alt: "Black & gray realism work in progress" },
+  { src: "/portfolio/tattoo-13.jpg",  w: 1350, h: 1800, alt: "Portrait realism by Julián Morales" },
+  { src: "/portfolio/tattoo-17.jpg",  w: 1350, h: 1800, alt: "Black & gray detail by Julián Morales" },
   { src: "/portfolio/tattoo-05.jpg",  w: 1080, h: 1440, alt: "Memorial portrait by Julián Morales" },
+  { src: "/portfolio/tattoo-14.jpg",  w: 1338, h: 1800, alt: "Religious figure — black & gray realism" },
   { src: "/portfolio/tattoo-06.jpeg", w: 384,  h: 699,  alt: "Realism detail by Julián Morales" },
   { src: "/portfolio/tattoo-07.jpeg", w: 473,  h: 809,  alt: "Religious figure tattoo" },
   { src: "/portfolio/tattoo-08.jpeg", w: 388,  h: 642,  alt: "Portrait piece" },
   { src: "/portfolio/tattoo-09.jpeg", w: 327,  h: 771,  alt: "Black & gray sleeve detail" },
-  // New pieces — append below as files arrive in /public/portfolio/
 ];
 
 export default function Portfolio() {
@@ -77,18 +86,23 @@ export default function Portfolio() {
               className="group relative mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-xl border border-brand-gold/15 bg-brand-ink"
             >
               {item.type === "video" ? (
-                <video
-                  src={item.src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  aria-label={item.alt}
-                  width={item.w}
-                  height={item.h}
-                  className="block h-auto w-full"
-                />
+                <>
+                  <video
+                    src={item.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-label={item.alt}
+                    width={item.w}
+                    height={item.h}
+                    className="block h-auto w-full"
+                  />
+                  <span className="absolute top-3 left-3 rounded-full border border-brand-gold/40 bg-black/70 px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-brand-gold backdrop-blur-sm">
+                    Process
+                  </span>
+                </>
               ) : (
                 <Image
                   src={item.src}
