@@ -31,26 +31,25 @@ type Item = ImageItem | VideoItem;
 
 // Interleaved order — mixing new and existing pieces so the masonry
 // reads with variety instead of "new at the end".
+// Curated, deduplicated. Items with descriptive alt text matching the
+// actual subject of each piece.
 const ITEMS: Item[] = [
-  { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Christ portrait — black & gray realism by Julián Morales" },
-  { src: "/portfolio/tattoo-10.jpg",  w: 1350, h: 1800, alt: "Lion and rose sleeve — black & gray realism" },
-  { src: "/portfolio/tattoo-18.jpg",  w: 1350, h: 1800, alt: "Spartan helmet full sleeve — black & gray realism" },
+  { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Christ portrait with crown of thorns — black & gray realism" },
+  { src: "/portfolio/tattoo-10.jpg",  w: 1350, h: 1800, alt: "Roaring lion and rose forearm — black & gray realism" },
+  { src: "/portfolio/tattoo-18.jpg",  w: 1350, h: 1800, alt: "Knight helmet and roses full sleeve — black & gray realism" },
   { type: "video", src: "/videos/portfolio-jesus.mp4", w: 720, h: 1280, alt: "Process clip — Christ tattoo by Julián Morales" },
   { src: "/portfolio/tattoo-15.jpg",  w: 1350, h: 1800, alt: "Medusa with serpents — black & gray realism" },
-  { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Realism portrait piece by Julián Morales" },
-  { src: "/portfolio/tattoo-11.jpg",  w: 1350, h: 1800, alt: "Black & gray realism piece by Julián Morales" },
-  { src: "/portfolio/tattoo-03.webp", w: 1600, h: 2071, alt: "Religious imagery — black & gray" },
-  { src: "/portfolio/tattoo-12.jpg",  w: 1350, h: 1800, alt: "Black & gray realism work" },
-  { src: "/portfolio/tattoo-16.jpg",  w: 1383, h: 1800, alt: "Realism detail by Julián Morales" },
-  { src: "/portfolio/tattoo-04.jpg",  w: 1080, h: 1440, alt: "Black & gray realism work in progress" },
-  { src: "/portfolio/tattoo-13.jpg",  w: 1350, h: 1800, alt: "Portrait realism by Julián Morales" },
-  { src: "/portfolio/tattoo-17.jpg",  w: 1350, h: 1800, alt: "Black & gray detail by Julián Morales" },
-  { src: "/portfolio/tattoo-05.jpg",  w: 1080, h: 1440, alt: "Memorial portrait by Julián Morales" },
-  { src: "/portfolio/tattoo-14.jpg",  w: 1338, h: 1800, alt: "Religious figure — black & gray realism" },
-  { src: "/portfolio/tattoo-06.jpeg", w: 384,  h: 699,  alt: "Realism detail by Julián Morales" },
-  { src: "/portfolio/tattoo-07.jpeg", w: 473,  h: 809,  alt: "Religious figure tattoo" },
-  { src: "/portfolio/tattoo-08.jpeg", w: 388,  h: 642,  alt: "Portrait piece" },
-  { src: "/portfolio/tattoo-09.jpeg", w: 327,  h: 771,  alt: "Black & gray sleeve detail" },
+  { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Spartan helmet and lion shoulder piece — black & gray realism" },
+  { src: "/portfolio/tattoo-11.jpg",  w: 1350, h: 1800, alt: "Pair of roses with filigree — black & gray forearm piece" },
+  { src: "/portfolio/tattoo-03.webp", w: 1600, h: 2071, alt: "Archangel Michael with sword — black & gray realism" },
+  { src: "/portfolio/tattoo-12.jpg",  w: 1350, h: 1800, alt: "Aztec warrior with jaguar helmet — full sleeve" },
+  { src: "/portfolio/tattoo-16.jpg",  w: 1383, h: 1800, alt: "Virgin Mary praying — black & gray realism" },
+  { src: "/portfolio/tattoo-04.jpg",  w: 1080, h: 1440, alt: "Virgin of Guadalupe with detailed veil — black & gray realism" },
+  { src: "/portfolio/tattoo-13.jpg",  w: 1350, h: 1800, alt: "Knight helmet and roses sleeve — front view" },
+  { src: "/portfolio/tattoo-17.jpg",  w: 1350, h: 1800, alt: "Roman numeral clock with baroque scrollwork — black & gray" },
+  { src: "/portfolio/tattoo-05.jpg",  w: 1080, h: 1440, alt: "Skull with hourglass — black & gray realism" },
+  { src: "/portfolio/tattoo-06.jpeg", w: 384,  h: 699,  alt: "Anubis with pyramid and ankh — Egyptian piece" },
+  { src: "/portfolio/tattoo-08.jpeg", w: 388,  h: 642,  alt: "Eagle and horse with clock — sleeve detail" },
 ];
 
 export default function Portfolio() {
