@@ -8,11 +8,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Strict palette: black, white, gold. Grays are opacities of white.
+        // Strict palette: pure black, pure white, gold gradient stops.
         brand: {
-          black: "#0a0a0a",
-          deep: "#101010",
-          charcoal: "#181818",
+          black: "#000000",
+          ink: "#0a0a0a",        // for elements that need slight separation from pure black
+          deep: "#0d0d0d",
+          charcoal: "#161616",
+          white: "#ffffff",
+          cream: "#FAFAF6",      // for paper-feel light backgrounds
           gold: "#D4AF37",
           "gold-light": "#E8C97A",
           "gold-dark": "#A88B2C",

@@ -15,9 +15,11 @@ export const ARTIST = {
   email: "julianmtattoo23@gmail.com",
   phone: "+1 (408) 794-5667",
   phoneRaw: "+14087945667",
-  whatsappNumber: "14087945667",
+  // Public-facing location string (used on Home / About / Footer / Contact)
+  location: "San José, California",
+  // Detailed address — used ONLY on legal pages (Privacy / Terms) where A2P
+  // 10DLC review requires the full physical address.
   studio: {
-    name: "Premium Clan Tattoo Studio",
     street: "1621 Alum Rock Ave",
     city: "San Jose",
     state: "CA",
@@ -36,9 +38,5 @@ export const ARTIST = {
 } as const;
 
 export const FULL_ADDRESS = `${ARTIST.studio.street}, ${ARTIST.studio.city}, ${ARTIST.studio.state} ${ARTIST.studio.zip}`;
-
-export const WHATSAPP_LINK = `https://wa.me/${ARTIST.whatsappNumber}?text=${encodeURIComponent(
-  "Hi Julian — I'd like to book a tattoo consultation."
-)}`;
 
 export const MAILTO_LINK = `mailto:${ARTIST.email}`;

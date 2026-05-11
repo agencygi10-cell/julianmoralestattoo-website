@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Instagram } from "lucide-react";
 import Logo from "./Logo";
-import { ARTIST, FULL_ADDRESS } from "@/lib/site";
+import { ARTIST } from "@/lib/site";
 
 const TIKTOK_ICON = (
   <svg
@@ -24,14 +24,13 @@ const NAV = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative z-10 border-t border-brand-gold/15 bg-brand-deep/70 py-14 backdrop-blur-sm">
+    <footer className="relative z-10 border-t border-brand-gold/15 bg-brand-ink/80 py-14 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
@@ -42,8 +41,7 @@ export default function Footer() {
               English &amp; Español.
             </p>
             <div className="mt-5 text-sm text-white/60">
-              <div className="text-white">{ARTIST.studio.name}</div>
-              <div>{FULL_ADDRESS}</div>
+              <div className="text-white">{ARTIST.location}</div>
             </div>
           </div>
 

@@ -17,7 +17,6 @@ export default function About() {
     <section className="relative pt-32 pb-20 lg:pt-36 lg:pb-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left: portrait */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -26,7 +25,6 @@ export default function About() {
             className="lg:col-span-5"
           >
             <div className="relative">
-              {/* Glow halo */}
               <div
                 aria-hidden
                 className="absolute -inset-4 rounded-[2rem] opacity-50 blur-2xl"
@@ -36,7 +34,6 @@ export default function About() {
                 }}
               />
 
-              {/* Image with gold rim */}
               <div
                 className="relative rounded-2xl p-[1.5px]"
                 style={{
@@ -44,7 +41,7 @@ export default function About() {
                     "linear-gradient(140deg, rgba(232, 201, 122, 0.7) 0%, rgba(168, 139, 44, 0.3) 50%, rgba(232, 201, 122, 0.7) 100%)",
                 }}
               >
-                <div className="relative overflow-hidden rounded-2xl bg-brand-deep">
+                <div className="relative overflow-hidden rounded-2xl bg-brand-ink">
                   <Image
                     src="/about/julian-portrait.webp"
                     alt="Julián Morales — Black & Gray Realism Tattoo Artist"
@@ -72,7 +69,6 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right: copy */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -88,11 +84,15 @@ export default function About() {
 
             <div className="mt-7 space-y-5 text-white/70 leading-relaxed text-base sm:text-lg">
               <p>
-                I&apos;m Julián Morales, a black &amp; gray realism tattoo artist
-                with{" "}
-                <span className="text-white">{ARTIST.stats.yearsExperience} years</span>{" "}
+                I&apos;m Julián Morales, a black &amp; gray realism tattoo
+                artist with{" "}
+                <span className="text-white">
+                  {ARTIST.stats.yearsExperience} years
+                </span>{" "}
                 of experience and over{" "}
-                <span className="text-white">{ARTIST.stats.healedPieces} healed pieces</span>{" "}
+                <span className="text-white">
+                  {ARTIST.stats.healedPieces} healed pieces
+                </span>{" "}
                 documented on my Instagram.
               </p>
               <p>
@@ -103,9 +103,10 @@ export default function About() {
                 isn&apos;t a drawing — it&apos;s a memory rendered in skin.
               </p>
               <p>
-                I work by appointment only at{" "}
-                <span className="text-white">{ARTIST.studio.name}</span> in San
-                Jose, in <span className="text-white">English and Spanish</span>.
+                Based in{" "}
+                <span className="text-white">{ARTIST.location}</span>, by
+                appointment only, in{" "}
+                <span className="text-white">English and Spanish</span>.
               </p>
             </div>
 

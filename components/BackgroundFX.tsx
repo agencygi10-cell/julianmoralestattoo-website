@@ -1,24 +1,29 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 /**
- * Animated background — three layered effects:
+ * Animated background — three layered effects on dark pages:
  * 1. Slowly-shifting gold gradient mesh (CSS animation)
  * 2. Mouse-tracking radial glow (transform-only, cheap)
  * 3. Floating gold particles canvas
  *
- * All layers are pointer-events:none, fixed, behind content (z-0).
+ * SKIPPED on the Home page (/) — Home has its own white theme with
+ * the tattoo machine animation, no dark background effects needed.
  */
 export default function BackgroundFX() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const [mouse, setMouse] = useState<{ x: number; y: number }>({
     x: 0.5,
     y: 0.5,
   });
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Mouse tracking
   useEffect(() => {
+    if (isHome) return;
     const onMove = (e: MouseEvent) => {
       setMouse({
         x: e.clientX / window.innerWidth,
@@ -27,10 +32,10 @@ export default function BackgroundFX() {
     };
     window.addEventListener("mousemove", onMove, { passive: true });
     return () => window.removeEventListener("mousemove", onMove);
-  }, []);
+  }, [isHome]);
 
-  // Particle canvas
   useEffect(() => {
+    if (isHome) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -54,7 +59,6 @@ export default function BackgroundFX() {
       canvas.style.height = `${window.innerHeight}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // Density: ~1 particle per 70k px, capped 12-22
       const count = Math.min(
         22,
         Math.max(12, Math.floor((window.innerWidth * window.innerHeight) / 70000))
@@ -96,14 +100,15 @@ export default function BackgroundFX() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [isHome]);
+
+  if (isHome) return null;
 
   return (
     <div
       aria-hidden
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
-      {/* Animated gradient mesh — slow morph */}
       <div
         className="absolute inset-0 animate-mesh-shift"
         style={{
@@ -111,11 +116,7 @@ export default function BackgroundFX() {
             "radial-gradient(ellipse 50% 40% at 20% 25%, rgba(212, 175, 55, 0.10) 0%, transparent 60%), radial-gradient(ellipse 45% 35% at 80% 75%, rgba(232, 201, 122, 0.08) 0%, transparent 65%), radial-gradient(ellipse 35% 30% at 50% 50%, rgba(168, 139, 44, 0.06) 0%, transparent 70%)",
         }}
       />
-
-      {/* Subtle gold grid */}
       <div className="absolute inset-0 grid-bg opacity-40" />
-
-      {/* Mouse-follow glow — uses transform for perf, follows cursor smoothly */}
       <div
         className="absolute inset-0 transition-transform duration-[800ms] ease-out"
         style={{
@@ -124,14 +125,8 @@ export default function BackgroundFX() {
           }%, rgba(212, 175, 55, 0.10) 0%, transparent 45%)`,
         }}
       />
-
-      {/* Particles */}
       <canvas ref={canvasRef} className="absolute inset-0" />
-
-      {/* Grain noise overlay */}
       <div className="grain" />
-
-      {/* Vignette for depth */}
       <div
         className="absolute inset-0"
         style={{

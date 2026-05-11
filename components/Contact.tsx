@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { Send, MessageCircle, Mail, MapPin, Check } from "lucide-react";
-import { ARTIST, FULL_ADDRESS, WHATSAPP_LINK, MAILTO_LINK } from "@/lib/site";
+import { Send, Mail, MapPin, Check } from "lucide-react";
+import { ARTIST, MAILTO_LINK } from "@/lib/site";
 
 type FormValues = {
   name: string;
@@ -75,25 +75,8 @@ export default function Contact() {
             className="lg:col-span-5 space-y-5"
           >
             <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 rounded-xl border border-brand-gold/20 bg-brand-deep/50 p-4 transition-all hover:border-brand-gold/50 hover:bg-brand-deep/80"
-            >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold">
-                <MessageCircle size={20} />
-              </div>
-              <div>
-                <div className="text-xs uppercase tracking-wider text-white/40">
-                  WhatsApp
-                </div>
-                <div className="text-sm text-white">{ARTIST.phone}</div>
-              </div>
-            </a>
-
-            <a
               href={MAILTO_LINK}
-              className="flex items-center gap-4 rounded-xl border border-brand-gold/20 bg-brand-deep/50 p-4 transition-all hover:border-brand-gold/50 hover:bg-brand-deep/80"
+              className="flex items-center gap-4 rounded-xl border border-brand-gold/20 bg-brand-ink/50 p-4 transition-all hover:border-brand-gold/50 hover:bg-brand-ink/80"
             >
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold">
                 <Mail size={20} />
@@ -102,25 +85,30 @@ export default function Contact() {
                 <div className="text-xs uppercase tracking-wider text-white/40">
                   Email
                 </div>
-                <div className="text-sm text-white truncate">{ARTIST.email}</div>
+                <div className="text-sm text-white truncate">
+                  {ARTIST.email}
+                </div>
               </div>
             </a>
 
-            <div className="flex items-start gap-4 rounded-xl border border-brand-gold/20 bg-brand-deep/50 p-4">
+            <div className="flex items-start gap-4 rounded-xl border border-brand-gold/20 bg-brand-ink/50 p-4">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold">
                 <MapPin size={20} />
               </div>
               <div>
                 <div className="text-xs uppercase tracking-wider text-white/40">
-                  Studio
+                  Based in
                 </div>
-                <div className="text-sm text-white">{ARTIST.studio.name}</div>
-                <div className="text-sm text-white/60">{FULL_ADDRESS}</div>
+                <div className="text-sm text-white">{ARTIST.location}</div>
+                <div className="text-sm text-white/60">
+                  By appointment only
+                </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-brand-gold/15 bg-brand-deep/30 p-4 text-xs text-white/50 leading-relaxed">
-              By appointment only · No walk-ins · 18+ with valid ID · English &amp; Español
+            <div className="rounded-xl border border-brand-gold/15 bg-brand-ink/30 p-4 text-xs text-white/50 leading-relaxed">
+              No walk-ins · 18+ with valid ID · English &amp; Español ·
+              Response within 48 hours
             </div>
           </motion.div>
 
@@ -204,7 +192,10 @@ export default function Contact() {
                     className="form-input resize-none"
                     {...register("description", {
                       required: "Please describe your idea",
-                      minLength: { value: 10, message: "A little more detail helps" },
+                      minLength: {
+                        value: 10,
+                        message: "A little more detail helps",
+                      },
                     })}
                   />
                 </Field>
@@ -218,7 +209,6 @@ export default function Contact() {
                   />
                 </Field>
 
-                {/* SMS consent — A2P 10DLC compliant */}
                 <fieldset className="space-y-4 pt-2">
                   <legend className="text-xs uppercase tracking-widest text-brand-gold mb-2">
                     SMS Communication Preferences
@@ -227,37 +217,39 @@ export default function Contact() {
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-deep accent-brand-gold cursor-pointer"
+                      className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-ink accent-brand-gold cursor-pointer"
                       {...register("smsServiceConsent")}
                     />
                     <span className="text-xs sm:text-sm text-white/70 leading-relaxed">
                       <span className="text-white font-medium">
                         I agree to receive service SMS messages from Julián Morales
                       </span>{" "}
-                      — appointment confirmations, reminders, rescheduling updates,
-                      and customer support. Message frequency varies. Message and
-                      data rates may apply. Reply <strong className="text-white">STOP</strong> to opt out, <strong className="text-white">HELP</strong> for help.
+                      — appointment confirmations, reminders, rescheduling
+                      updates, and customer support. Message frequency varies.
+                      Message and data rates may apply. Reply{" "}
+                      <strong className="text-white">STOP</strong> to opt out,{" "}
+                      <strong className="text-white">HELP</strong> for help.
                     </span>
                   </label>
 
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-deep accent-brand-gold cursor-pointer"
+                      className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-ink accent-brand-gold cursor-pointer"
                       {...register("smsMarketingConsent")}
                     />
                     <span className="text-xs sm:text-sm text-white/70 leading-relaxed">
                       <span className="text-white font-medium">(Optional)</span>{" "}
-                      I&apos;d also like to receive occasional promotional SMS messages
-                      from Julián Morales about special offers and openings.
-                      Not required for booking.
+                      I&apos;d also like to receive occasional promotional SMS
+                      messages from Julián Morales about special offers and
+                      openings. Not required for booking.
                     </span>
                   </label>
                 </fieldset>
 
                 <p className="text-xs text-white/40 leading-relaxed pt-2">
-                  Consent is not a condition of purchase. By submitting this form
-                  you also agree to our{" "}
+                  Consent is not a condition of purchase. By submitting this
+                  form you also agree to our{" "}
                   <a
                     href="/terms"
                     className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
@@ -312,8 +304,12 @@ function Field({
           {label}
           {required && <span className="text-brand-gold ml-1">*</span>}
         </span>
-        {hint && !error && <span className="text-[11px] text-white/40">{hint}</span>}
-        {error && <span className="text-[11px] text-red-400/90">{error}</span>}
+        {hint && !error && (
+          <span className="text-[11px] text-white/40">{hint}</span>
+        )}
+        {error && (
+          <span className="text-[11px] text-red-400/90">{error}</span>
+        )}
       </div>
       {children}
     </label>
@@ -331,7 +327,7 @@ function SuccessState({ onReset }: { onReset: () => void }) {
       </h3>
       <p className="mt-3 text-white/60 leading-relaxed max-w-sm mx-auto">
         Thanks for reaching out. I&apos;ll review your idea and reply within 48
-        hours. If it&apos;s urgent, message me on WhatsApp.
+        hours.
       </p>
       <button
         type="button"

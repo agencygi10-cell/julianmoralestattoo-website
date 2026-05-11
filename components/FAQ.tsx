@@ -3,11 +3,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { ARTIST } from "@/lib/site";
 
 const ITEMS = [
   {
     q: "How do I book?",
-    a: "Send a message via WhatsApp (+1 408 794 5667) or fill out the contact form on this page. Include your idea, references if you have any, and the approximate size and placement. I respond within 48 hours.",
+    a: "Fill out the contact form on this page with your idea, references if you have any, and the approximate size and placement. I respond within 48 hours.",
   },
   {
     q: "Do you require a deposit?",
@@ -23,7 +24,7 @@ const ITEMS = [
   },
   {
     q: "How much does a piece cost?",
-    a: "Pricing depends on size, placement, and complexity. Send me your idea and I'll send a personalized quote — no surprise pricing, and the consultation is free.",
+    a: "Pricing depends on size, placement, and complexity. Send me your idea through the contact form and I'll send a personalized quote — no surprise pricing, and the consultation is free.",
   },
   {
     q: "How long does a session take?",
@@ -38,8 +39,8 @@ const ITEMS = [
     a: "Sí — atiendo en inglés y español. Mándame tu mensaje en el idioma que se te haga más cómodo.",
   },
   {
-    q: "Where is your studio?",
-    a: "I work at Premium Clan Tattoo Studio — 1621 Alum Rock Ave, San Jose, CA 95116. The studio is licensed, sterile, and well-reviewed locally.",
+    q: "Where are you based?",
+    a: `${ARTIST.location}. I work by appointment only — the exact session location is confirmed with you once your deposit is in.`,
   },
   {
     q: "Is there a minimum age?",
@@ -61,7 +62,8 @@ export default function FAQ() {
         >
           <div className="eyebrow mb-4">FAQ</div>
           <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-white">
-            The questions <span className="text-gold-gradient">everyone asks</span>.
+            The questions{" "}
+            <span className="text-gold-gradient">everyone asks</span>.
           </h2>
         </motion.div>
 

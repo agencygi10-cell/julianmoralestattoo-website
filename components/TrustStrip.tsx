@@ -12,8 +12,8 @@ const items = [
   },
   {
     icon: MapPin,
-    label: ARTIST.studio.name,
-    sub: `${ARTIST.studio.city}, ${ARTIST.studio.state}`,
+    label: ARTIST.location,
+    sub: "By appointment only",
   },
   {
     icon: Sparkles,
@@ -27,9 +27,15 @@ const items = [
   },
 ];
 
-export default function TrustStrip() {
+export default function TrustStrip({ light = false }: { light?: boolean }) {
   return (
-    <section className="relative border-y border-brand-gold/15 bg-brand-deep/50 py-10 sm:py-12 backdrop-blur-sm">
+    <section
+      className={`relative border-y py-10 sm:py-12 backdrop-blur-sm ${
+        light
+          ? "border-black/10 bg-white/60"
+          : "border-brand-gold/15 bg-brand-ink/50"
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {items.map((it, i) => {
@@ -47,10 +53,20 @@ export default function TrustStrip() {
                   <Icon size={18} />
                 </div>
                 <div className="min-w-0">
-                  <div className="font-display text-sm sm:text-base font-semibold text-white truncate">
+                  <div
+                    className={`font-display text-sm sm:text-base font-semibold truncate ${
+                      light ? "text-brand-black" : "text-white"
+                    }`}
+                  >
                     {it.label}
                   </div>
-                  <div className="text-xs text-white/50 truncate">{it.sub}</div>
+                  <div
+                    className={`text-xs truncate ${
+                      light ? "text-brand-black/50" : "text-white/50"
+                    }`}
+                  >
+                    {it.sub}
+                  </div>
                 </div>
               </motion.div>
             );

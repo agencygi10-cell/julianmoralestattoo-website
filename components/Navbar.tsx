@@ -9,7 +9,6 @@ import Logo from "./Logo";
 const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -18,6 +17,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  // Home is light-themed — Navbar needs dark text on white background
+  const isHome = pathname === "/";
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
@@ -25,7 +27,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -33,17 +34,28 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // Theme-conditional classes
+  const headerBg = scrolled
+    ? isHome
+      ? "bg-white/85 backdrop-blur-md border-b border-brand-gold/15"
+      : "bg-brand-black/85 backdrop-blur-md border-b border-brand-gold/15"
+    : "bg-transparent border-b border-transparent";
+
+  const inactiveLink = isHome
+    ? "text-brand-black/70 hover:text-brand-gold-dark"
+    : "text-white/80 hover:text-brand-gold";
+
+  const activeLink = isHome ? "text-brand-gold-dark" : "text-brand-gold";
+
+  const burgerColor = isHome ? "text-brand-black" : "text-white";
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-brand-black/85 backdrop-blur-md border-b border-brand-gold/15"
-          : "bg-transparent border-b border-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${headerBg}`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" aria-label="Julián Morales — Home">
-          <Logo />
+          <Logo dark={isHome} />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -52,9 +64,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               className={`relative text-sm transition-colors ${
-                isActive(l.href)
-                  ? "text-brand-gold"
-                  : "text-white/80 hover:text-brand-gold"
+                isActive(l.href) ? activeLink : inactiveLink
               }`}
             >
               {l.label}
@@ -78,7 +88,7 @@ export default function Navbar() {
           type="button"
           aria-label="Open menu"
           aria-expanded={open}
-          className="md:hidden text-white"
+          className={`md:hidden ${burgerColor}`}
           onClick={() => setOpen(!open)}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -86,7 +96,11 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden border-t border-brand-gold/15 bg-brand-black/95 backdrop-blur-md">
+        <div
+          className={`md:hidden border-t border-brand-gold/15 backdrop-blur-md ${
+            isHome ? "bg-white/95" : "bg-brand-black/95"
+          }`}
+        >
           <div className="flex flex-col gap-1 px-4 pb-4 pt-2">
             {NAV_LINKS.map((l) => (
               <Link
@@ -94,8 +108,8 @@ export default function Navbar() {
                 href={l.href}
                 className={`rounded-lg px-3 py-3 text-sm transition-colors ${
                   isActive(l.href)
-                    ? "bg-brand-gold/10 text-brand-gold"
-                    : "text-white/90 hover:bg-brand-gold/10 hover:text-brand-gold"
+                    ? "bg-brand-gold/10 " + activeLink
+                    : inactiveLink + " hover:bg-brand-gold/10"
                 }`}
               >
                 {l.label}

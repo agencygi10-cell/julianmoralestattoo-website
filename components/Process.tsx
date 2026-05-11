@@ -2,12 +2,13 @@
 
 import { motion } from "framer-motion";
 import { MessageSquare, FileText, CalendarCheck, Sparkles } from "lucide-react";
+import { ARTIST } from "@/lib/site";
 
 const STEPS = [
   {
     icon: MessageSquare,
     title: "Reach Out",
-    body: "Message me via WhatsApp or the contact form with your idea, references, and approximate placement and size. I respond within 48 hours.",
+    body: "Send a message via the contact form with your idea, references, and approximate placement and size. I respond within 48 hours.",
   },
   {
     icon: FileText,
@@ -22,7 +23,7 @@ const STEPS = [
   {
     icon: Sparkles,
     title: "The Session",
-    body: "We meet at Premium Clan Tattoo Studio. I review the design with you before we start — adjusting until you're 100% sure. Then we tattoo.",
+    body: `We meet in ${ARTIST.location}. I review the design with you before we start — adjusting until you're 100% sure. Then we tattoo.`,
   },
 ];
 
@@ -43,8 +44,8 @@ export default function Process() {
             <span className="text-gold-gradient">healed piece</span>.
           </h2>
           <p className="mt-5 text-white/60 text-base sm:text-lg leading-relaxed">
-            A clear path so you know exactly what to expect — no surprises,
-            no rushed decisions.
+            A clear path so you know exactly what to expect — no surprises, no
+            rushed decisions.
           </p>
         </motion.div>
 
