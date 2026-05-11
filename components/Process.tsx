@@ -27,10 +27,31 @@ const STEPS = [
   },
 ];
 
-export default function Process() {
+export default function Process({ light = false }: { light?: boolean }) {
+  // Heading + subtitle adapt to background theme. Cards are ALWAYS dark for
+  // strong contrast on light pages (per client direction).
+  const sectionBorder = light ? "border-t border-black/10" : "border-t border-brand-gold/10";
+  const headingColor = light ? "text-brand-black" : "text-white";
+  const subtitleColor = light ? "text-brand-black/60" : "text-white/60";
+
   return (
-    <section className="relative py-16 sm:py-24 border-t border-brand-gold/10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section
+      className={`relative py-16 sm:py-24 ${
+        light ? "bg-white text-brand-black" : ""
+      } ${sectionBorder}`}
+    >
+      {light && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+          }}
+        />
+      )}
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,13 +60,13 @@ export default function Process() {
           className="max-w-3xl"
         >
           <div className="eyebrow mb-4">The Process</div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-white">
+          <h2 className={`font-display text-3xl sm:text-5xl font-bold leading-tight ${headingColor}`}>
             From first message to{" "}
             <span className="text-gold-gradient">healed piece</span>.
           </h2>
-          <p className="mt-5 text-white/60 text-base sm:text-lg leading-relaxed">
-            A clear path so you know exactly what to expect — no surprises, no
-            rushed decisions.
+          <p className={`mt-5 text-base sm:text-lg leading-relaxed ${subtitleColor}`}>
+            A clear path so you know exactly what to expect — no surprises,
+            no rushed decisions.
           </p>
         </motion.div>
 
@@ -59,7 +80,11 @@ export default function Process() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.55, delay: i * 0.1 }}
-                className="card-dark group relative rounded-2xl p-7 transition-all hover:border-brand-gold/30"
+                className={`group relative rounded-2xl p-7 transition-all hover:border-brand-gold/40 ${
+                  light
+                    ? "bg-brand-black text-white border border-brand-gold/20 shadow-2xl"
+                    : "card-dark"
+                }`}
               >
                 <div className="absolute -top-3 right-5 rounded-full border border-brand-gold/30 bg-brand-black px-3 py-1 text-[11px] uppercase tracking-widest text-brand-gold">
                   Step {i + 1}
@@ -72,7 +97,7 @@ export default function Process() {
                 <h3 className="mt-5 font-display text-xl font-semibold text-white">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm text-white/60 leading-relaxed">
+                <p className="mt-3 text-sm text-white/65 leading-relaxed">
                   {step.body}
                 </p>
               </motion.div>

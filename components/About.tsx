@@ -12,10 +12,31 @@ const SPECIALTIES = [
   "Black & Gray",
 ];
 
-export default function About() {
+export default function About({ light = false }: { light?: boolean }) {
+  const headingColor = light ? "text-brand-black" : "text-white";
+  const bodyColor = light ? "text-brand-black/70" : "text-white/70";
+  const emphasis = light ? "text-brand-black" : "text-white";
+  const dividerBorder = light ? "border-black/10" : "border-brand-gold/15";
+  const statLabel = light ? "text-brand-black/50" : "text-white/50";
+
   return (
-    <section className="relative pt-32 pb-20 lg:pt-36 lg:pb-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section
+      className={`relative pt-32 pb-20 lg:pt-36 lg:pb-24 ${
+        light ? "bg-white text-brand-black" : ""
+      }`}
+    >
+      {light && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+          }}
+        />
+      )}
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -77,22 +98,20 @@ export default function About() {
             className="lg:col-span-7"
           >
             <div className="eyebrow mb-4">About</div>
-            <h1 className="font-display text-4xl sm:text-6xl font-bold leading-tight text-white">
+            <h1
+              className={`font-display text-4xl sm:text-6xl font-bold leading-tight ${headingColor}`}
+            >
               Permanent art,{" "}
               <span className="text-gold-gradient">made with intention</span>.
             </h1>
 
-            <div className="mt-7 space-y-5 text-white/70 leading-relaxed text-base sm:text-lg">
+            <div className={`mt-7 space-y-5 leading-relaxed text-base sm:text-lg ${bodyColor}`}>
               <p>
                 I&apos;m Julián Morales, a black &amp; gray realism tattoo
                 artist with{" "}
-                <span className="text-white">
-                  {ARTIST.stats.yearsExperience} years
-                </span>{" "}
+                <span className={emphasis}>{ARTIST.stats.yearsExperience} years</span>{" "}
                 of experience and over{" "}
-                <span className="text-white">
-                  {ARTIST.stats.healedPieces} healed pieces
-                </span>{" "}
+                <span className={emphasis}>{ARTIST.stats.healedPieces} healed pieces</span>{" "}
                 documented on my Instagram.
               </p>
               <p>
@@ -103,10 +122,8 @@ export default function About() {
                 isn&apos;t a drawing — it&apos;s a memory rendered in skin.
               </p>
               <p>
-                Based in{" "}
-                <span className="text-white">{ARTIST.location}</span>, by
-                appointment only, in{" "}
-                <span className="text-white">English and Spanish</span>.
+                Based in <span className={emphasis}>{ARTIST.location}</span>, by
+                appointment only, in <span className={emphasis}>English and Spanish</span>.
               </p>
             </div>
 
@@ -121,11 +138,13 @@ export default function About() {
               ))}
             </div>
 
-            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-4 border-t border-brand-gold/15 pt-8">
-              <Stat value={ARTIST.stats.yearsExperience} label="Years" />
-              <Stat value={ARTIST.stats.healedPieces} label="Healed" />
-              <Stat value="100%" label="Custom" />
-              <Stat value="EN/ES" label="Bilingual" />
+            <div
+              className={`mt-10 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-4 border-t pt-8 ${dividerBorder}`}
+            >
+              <Stat value={ARTIST.stats.yearsExperience} label="Years" labelClass={statLabel} />
+              <Stat value={ARTIST.stats.healedPieces} label="Healed" labelClass={statLabel} />
+              <Stat value="100%" label="Custom" labelClass={statLabel} />
+              <Stat value="EN/ES" label="Bilingual" labelClass={statLabel} />
             </div>
           </motion.div>
         </div>
@@ -134,13 +153,21 @@ export default function About() {
   );
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function Stat({
+  value,
+  label,
+  labelClass,
+}: {
+  value: string;
+  label: string;
+  labelClass: string;
+}) {
   return (
     <div>
       <div className="font-display text-2xl sm:text-3xl font-bold text-gold-gradient leading-none">
         {value}
       </div>
-      <div className="mt-2 text-[10px] sm:text-xs uppercase tracking-widest text-white/50">
+      <div className={`mt-2 text-[10px] sm:text-xs uppercase tracking-widest ${labelClass}`}>
         {label}
       </div>
     </div>
