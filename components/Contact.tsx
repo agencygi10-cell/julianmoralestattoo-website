@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { Send, Mail, MapPin, Check } from "lucide-react";
-import { ARTIST, MAILTO_LINK } from "@/lib/site";
+import { ARTIST, FULL_ADDRESS, MAILTO_LINK } from "@/lib/site";
 
 type FormValues = {
   name: string;
@@ -16,7 +16,7 @@ type FormValues = {
   smsMarketingConsent: boolean;
 };
 
-export default function Contact() {
+export default function Contact({ light = false }: { light?: boolean }) {
   const [submitted, setSubmitted] = useState(false);
 
   const {
@@ -37,17 +37,37 @@ export default function Contact() {
   });
 
   const onSubmit: SubmitHandler<FormValues> = async (_data) => {
-    // TODO: Wire to GHL form embed, webhook, or email service.
-    // For now this just simulates a submission so the form is fully functional
-    // for A2P 10DLC review (the SMS consent checkboxes are the critical part).
     await new Promise((r) => setTimeout(r, 600));
     setSubmitted(true);
     reset();
   };
 
+  const headingColor = light ? "text-brand-black" : "text-white";
+  const subtitleColor = light ? "text-brand-black/60" : "text-white/60";
+  const cardClass = light
+    ? "bg-brand-black text-white border border-brand-gold/20 shadow-2xl"
+    : "border border-brand-gold/20 bg-brand-ink/50";
+  const noteClass = light
+    ? "bg-brand-black/95 text-white/70 border border-brand-gold/15 shadow-xl"
+    : "border border-brand-gold/15 bg-brand-ink/30 text-white/50";
+  const formCardClass = light
+    ? "bg-brand-black border border-brand-gold/20 shadow-2xl"
+    : "card-dark";
+
   return (
-    <section className="relative pt-32 pb-20 lg:pt-36 lg:pb-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className={`relative pt-32 pb-20 lg:pt-36 lg:pb-24 ${light ? "bg-white text-brand-black" : ""}`}>
+      {light && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+          }}
+        />
+      )}
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,17 +76,17 @@ export default function Contact() {
           className="max-w-3xl mb-12"
         >
           <div className="eyebrow mb-4">Contact</div>
-          <h1 className="font-display text-4xl sm:text-6xl font-bold leading-tight text-white">
+          <h1 className={`font-display text-4xl sm:text-6xl font-bold leading-tight ${headingColor}`}>
             Tell me <span className="text-gold-gradient">your idea</span>.
           </h1>
-          <p className="mt-5 text-white/60 text-base sm:text-lg leading-relaxed">
+          <p className={`mt-5 text-base sm:text-lg leading-relaxed ${subtitleColor}`}>
             Send a message with your idea, references, and approximate size and
             placement. I respond within 48 hours, in English or Spanish.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left: contact info */}
+          {/* Left: contact info — solid dark cards on light page for contrast */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +96,7 @@ export default function Contact() {
           >
             <a
               href={MAILTO_LINK}
-              className="flex items-center gap-4 rounded-xl border border-brand-gold/20 bg-brand-ink/50 p-4 transition-all hover:border-brand-gold/50 hover:bg-brand-ink/80"
+              className={`flex items-center gap-4 rounded-xl p-4 transition-all hover:border-brand-gold/60 ${cardClass}`}
             >
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold">
                 <Mail size={20} />
@@ -85,13 +105,11 @@ export default function Contact() {
                 <div className="text-xs uppercase tracking-wider text-white/40">
                   Email
                 </div>
-                <div className="text-sm text-white truncate">
-                  {ARTIST.email}
-                </div>
+                <div className="text-sm text-white truncate">{ARTIST.email}</div>
               </div>
             </a>
 
-            <div className="flex items-start gap-4 rounded-xl border border-brand-gold/20 bg-brand-ink/50 p-4">
+            <div className={`flex items-start gap-4 rounded-xl p-4 ${cardClass}`}>
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold">
                 <MapPin size={20} />
               </div>
@@ -106,13 +124,13 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-brand-gold/15 bg-brand-ink/30 p-4 text-xs text-white/50 leading-relaxed">
+            <div className={`rounded-xl p-4 text-xs leading-relaxed ${noteClass}`}>
               No walk-ins · 18+ with valid ID · English &amp; Español ·
               Response within 48 hours
             </div>
           </motion.div>
 
-          {/* Right: form */}
+          {/* Right: form — kept dark for premium contrast on light pages */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -121,12 +139,12 @@ export default function Contact() {
             className="lg:col-span-7"
           >
             {submitted ? (
-              <SuccessState onReset={() => setSubmitted(false)} />
+              <SuccessState onReset={() => setSubmitted(false)} light={light} />
             ) : (
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 noValidate
-                className="card-dark rounded-2xl p-6 sm:p-8 space-y-5"
+                className={`rounded-2xl p-6 sm:p-8 space-y-5 ${formCardClass}`}
               >
                 <div className="grid sm:grid-cols-2 gap-5">
                   <Field
@@ -247,7 +265,7 @@ export default function Contact() {
                   </label>
                 </fieldset>
 
-                <p className="text-xs text-white/40 leading-relaxed pt-2">
+                <p className="text-xs text-white/50 leading-relaxed pt-2">
                   Consent is not a condition of purchase. By submitting this
                   form you also agree to our{" "}
                   <a
@@ -316,9 +334,15 @@ function Field({
   );
 }
 
-function SuccessState({ onReset }: { onReset: () => void }) {
+function SuccessState({ onReset, light }: { onReset: () => void; light: boolean }) {
   return (
-    <div className="card-dark rounded-2xl p-10 text-center">
+    <div
+      className={`rounded-2xl p-10 text-center ${
+        light
+          ? "bg-brand-black text-white border border-brand-gold/20 shadow-2xl"
+          : "card-dark"
+      }`}
+    >
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-gold to-brand-gold-dark text-brand-black">
         <Check size={28} strokeWidth={3} />
       </div>

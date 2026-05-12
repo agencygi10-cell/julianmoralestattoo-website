@@ -15,7 +15,8 @@ import { usePathname } from "next/navigation";
 export default function BackgroundFX() {
   const pathname = usePathname();
   // Skip rendering the dark animated background on light-themed routes.
-  const isHome = pathname === "/" || pathname === "/about";
+  const LIGHT_ROUTES = new Set(["/", "/about", "/portfolio", "/contact"]);
+  const isHome = LIGHT_ROUTES.has(pathname);
 
   const [mouse, setMouse] = useState<{ x: number; y: number }>({
     x: 0.5,

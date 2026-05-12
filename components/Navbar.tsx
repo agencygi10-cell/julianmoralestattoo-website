@@ -17,9 +17,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // Light-themed pages: Home (hero is white) and About (white throughout).
+  // Light-themed pages: every main route except the legal pages.
   // On these routes the Navbar uses dark text so it reads on the white bg.
-  const isHome = pathname === "/" || pathname === "/about";
+  const LIGHT_ROUTES = new Set(["/", "/about", "/portfolio", "/contact"]);
+  const isHome = LIGHT_ROUTES.has(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);

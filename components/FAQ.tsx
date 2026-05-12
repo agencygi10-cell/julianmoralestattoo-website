@@ -48,11 +48,17 @@ const ITEMS = [
   },
 ];
 
-export default function FAQ() {
+export default function FAQ({ light = false }: { light?: boolean }) {
   const [open, setOpen] = useState<number | null>(0);
 
+  const sectionBorder = light ? "border-t border-black/10" : "border-t border-brand-gold/10";
+  const headingColor = light ? "text-brand-black" : "text-white";
+  const cardClass = light
+    ? "bg-brand-black border border-brand-gold/20 shadow-xl"
+    : "card-dark";
+
   return (
-    <section className="relative py-16 sm:py-24 border-t border-brand-gold/10">
+    <section className={`relative py-16 sm:py-24 ${light ? "bg-white text-brand-black" : ""} ${sectionBorder}`}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -61,7 +67,7 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
         >
           <div className="eyebrow mb-4">FAQ</div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-white">
+          <h2 className={`font-display text-3xl sm:text-5xl font-bold leading-tight ${headingColor}`}>
             The questions{" "}
             <span className="text-gold-gradient">everyone asks</span>.
           </h2>
@@ -77,7 +83,7 @@ export default function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: i * 0.04 }}
-                className="card-dark overflow-hidden rounded-xl"
+                className={`overflow-hidden rounded-xl ${cardClass}`}
               >
                 <button
                   type="button"
