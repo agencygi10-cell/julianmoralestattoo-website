@@ -17,7 +17,6 @@ import {
   Pencil,
   Building2,
   CalendarCheck,
-  Palette,
   DollarSign,
 } from "lucide-react";
 import { ARTIST, MAILTO_LINK } from "@/lib/site";
@@ -30,7 +29,6 @@ type FormValues = {
   // Step 1 — Qualifier
   firstTattoo: "" | "yes" | "no";
   bodyArea: string;
-  color: "" | "bg" | "color";
   appointmentType: "" | "consultation" | "appointment";
   // Step 2 — Tattoo details
   description: string;
@@ -81,7 +79,6 @@ export default function Contact() {
     defaultValues: {
       firstTattoo: "",
       bodyArea: "",
-      color: "",
       appointmentType: "",
       description: "",
       budget: "",
@@ -98,7 +95,7 @@ export default function Contact() {
   // Validate just the current step's fields before advancing
   const nextStep = async () => {
     let fields: (keyof FormValues)[] = [];
-    if (step === 1) fields = ["firstTattoo", "bodyArea", "color", "appointmentType"];
+    if (step === 1) fields = ["firstTattoo", "bodyArea", "appointmentType"];
     if (step === 2) fields = ["description"];
     const valid = await trigger(fields);
     if (valid) setStep((s) => (s < 3 ? ((s + 1) as 1 | 2 | 3) : s));
@@ -316,24 +313,8 @@ export default function Contact() {
                         </select>
                       </Field>
 
-                      <Field
-                        label="What color tattoo?"
-                        icon={<Palette size={14} />}
-                        error={errors.color?.message}
-                        required
-                      >
-                        <select
-                          className="form-input"
-                          {...register("color", {
-                            required: "Please choose one",
-                          })}
-                        >
-                          <option value="">Select an option</option>
-                          <option value="bg">Black and Grey tattoo</option>
-                          <option value="color">Color tattoo</option>
-                        </select>
-                      </Field>
-
+                      {/* Julian works exclusively in black & grey — no color
+                          selector; the API stamps "Black and Grey". */}
                       <Field
                         label="What kind of appointment do you want?"
                         icon={<CalendarCheck size={14} />}

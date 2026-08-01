@@ -59,7 +59,7 @@ export async function POST(req: Request) {
     smsMarketingConsent,
   } = body;
 
-  // Required fields
+  // Required fields (no `color` — Julian works exclusively in black & grey)
   if (
     !fullName ||
     !email ||
@@ -67,7 +67,6 @@ export async function POST(req: Request) {
     !description ||
     !firstTattoo ||
     !bodyArea ||
-    !color ||
     !appointmentType
   ) {
     return NextResponse.json(
@@ -81,7 +80,7 @@ export async function POST(req: Request) {
   const nowIso = new Date().toISOString();
   const firstName = fullName.trim().split(/\s+/)[0];
   const lastName = fullName.trim().split(/\s+/).slice(1).join(" ");
-  const colorLabel = COLOR_LABELS[color] ?? color;
+  const colorLabel = color ? COLOR_LABELS[color] ?? color : "Black and Grey";
   const apptLabel = APPT_LABELS[appointmentType] ?? appointmentType;
   const budgetLabel = budget ? BUDGET_LABELS[budget] ?? budget : "";
 
@@ -109,7 +108,7 @@ export async function POST(req: Request) {
   const summaryHtml = summary.replace(/\n/g, "<br>");
 
   // Segmentation tags for GHL (internal — never shown on the public site).
-  const colorTag = color === "bg" ? "bw-tattoo" : "color-tattoo";
+  const colorTag = color === "color" ? "color-tattoo" : "bw-tattoo";
   const tags = [
     "website-lead",
     "julian-morales",
