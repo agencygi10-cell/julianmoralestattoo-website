@@ -108,7 +108,7 @@ function Hero() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="display-mega mt-6 text-[3rem] sm:text-7xl lg:text-[8rem] xl:text-[9rem] drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
           >
-            <span className="block text-white">JULIÁN</span>
+            <span className="block text-white">JULIAN</span>
             <span className="block text-gold-gradient">MORALES</span>
           </motion.h1>
 
