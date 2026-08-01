@@ -313,8 +313,23 @@ export default function Contact() {
                         </select>
                       </Field>
 
-                      {/* Julian works exclusively in black & grey — no color
-                          selector; the API stamps "Black and Grey". */}
+                      {/* Julian works exclusively in black & grey — the old
+                          color selector is replaced by this notice; the API
+                          stamps "Black and Grey" on every lead. */}
+                      <div className="flex items-start gap-3 rounded-lg border border-brand-gold/25 bg-brand-ink/40 px-4 py-3">
+                        <Sparkles
+                          size={16}
+                          className="mt-0.5 shrink-0 text-brand-gold"
+                        />
+                        <p className="text-xs sm:text-sm leading-relaxed text-white/70">
+                          <span className="text-white font-medium">
+                            Black &amp; Grey only
+                          </span>{" "}
+                          — Julian specializes exclusively in black and grey
+                          work. Every piece is designed in monochrome.
+                        </p>
+                      </div>
+
                       <Field
                         label="What kind of appointment do you want?"
                         icon={<CalendarCheck size={14} />}
