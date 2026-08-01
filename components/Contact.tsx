@@ -502,88 +502,6 @@ export default function Contact() {
                         />
                       </Field>
 
-                      {/* A2P 10DLC compliance — SMS consents */}
-                      <fieldset className="space-y-4 pt-2">
-                        <legend className="text-xs uppercase tracking-widest text-brand-gold mb-2">
-                          SMS Communication Preferences
-                        </legend>
-
-                        <label className="flex items-start gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-ink accent-brand-gold cursor-pointer"
-                            {...register("smsServiceConsent")}
-                          />
-                          <span className="text-xs sm:text-sm text-white/70 leading-relaxed">
-                            <span className="text-white font-medium">
-                              I agree to receive transactional SMS messages
-                              from Julian Morales at the phone number provided
-                            </span>{" "}
-                            — appointment confirmations, reminders and
-                            follow-up alerts, rescheduling updates, and
-                            customer support. Message frequency may vary.
-                            Message and data rates may apply. Reply{" "}
-                            <strong className="text-white">STOP</strong> to
-                            opt out,{" "}
-                            <strong className="text-white">HELP</strong> for
-                            help.
-                          </span>
-                        </label>
-
-                        <label className="flex items-start gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-ink accent-brand-gold cursor-pointer"
-                            {...register("smsMarketingConsent")}
-                          />
-                          <span className="text-xs sm:text-sm text-white/70 leading-relaxed">
-                            <span className="text-white font-medium">
-                              (Optional)
-                            </span>{" "}
-                            I agree to receive occasional promotional and
-                            marketing SMS messages from Julian Morales at the
-                            phone number provided, about special offers and
-                            openings. Not required for booking. Message
-                            frequency may vary. Message and data rates may
-                            apply. Reply{" "}
-                            <strong className="text-white">STOP</strong> to
-                            opt out,{" "}
-                            <strong className="text-white">HELP</strong> for
-                            help.
-                          </span>
-                        </label>
-                      </fieldset>
-
-                      <p className="text-xs text-white/50 leading-relaxed pt-2">
-                        SMS consent is optional and is collected only through
-                        the checkboxes above — you can send your booking
-                        request without opting in, and declining texts does
-                        not affect your booking in any way. If you opt in, you
-                        will receive transactional messages — booking
-                        confirmations, appointment reminders, and follow-up
-                        alerts — and, only if separately selected,
-                        promotional/marketing messages, from Julian Morales.
-                        Message frequency may vary. Message and data rates may
-                        apply. Reply STOP to unsubscribe or HELP for help.
-                        Consent is not a condition of any purchase or service.
-                        See our{" "}
-                        <a
-                          href="/terms"
-                          className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
-                        >
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a
-                          href="/privacy"
-                          className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
-                        >
-                          Privacy Policy
-                        </a>
-                        . Mobile information is never shared with third
-                        parties for marketing purposes.
-                      </p>
-
                       {serverError && (
                         <p
                           role="alert"
@@ -602,6 +520,90 @@ export default function Contact() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                {/* A2P 10DLC compliance — SMS consents. Rendered OUTSIDE the
+                    step wizard so the checkboxes and disclosures are in the
+                    DOM from first paint on every step: carrier compliance
+                    scanners and reviewers read the page as it loads and never
+                    click through to step 3. */}
+                <div className="mt-8 border-t border-brand-gold/15 pt-6 space-y-4">
+                  <fieldset className="space-y-4">
+                    <legend className="text-xs uppercase tracking-widest text-brand-gold mb-2">
+                      SMS Communication Preferences
+                    </legend>
+
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-ink accent-brand-gold cursor-pointer"
+                        {...register("smsServiceConsent")}
+                      />
+                      <span className="text-xs sm:text-sm text-white/70 leading-relaxed">
+                        <span className="text-white font-medium">
+                          I agree to receive transactional SMS messages from
+                          Julian Morales at the phone number provided
+                        </span>{" "}
+                        — appointment confirmations, reminders and follow-up
+                        alerts, rescheduling updates, and customer support.
+                        Message frequency may vary. Message and data rates may
+                        apply. Reply{" "}
+                        <strong className="text-white">STOP</strong> to opt
+                        out, <strong className="text-white">HELP</strong> for
+                        help.
+                      </span>
+                    </label>
+
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="mt-1 h-4 w-4 shrink-0 rounded border-brand-gold/40 bg-brand-ink accent-brand-gold cursor-pointer"
+                        {...register("smsMarketingConsent")}
+                      />
+                      <span className="text-xs sm:text-sm text-white/70 leading-relaxed">
+                        <span className="text-white font-medium">
+                          (Optional)
+                        </span>{" "}
+                        I agree to receive occasional promotional and
+                        marketing SMS messages from Julian Morales at the
+                        phone number provided, about special offers and
+                        openings. Not required for booking. Message frequency
+                        may vary. Message and data rates may apply. Reply{" "}
+                        <strong className="text-white">STOP</strong> to opt
+                        out, <strong className="text-white">HELP</strong> for
+                        help.
+                      </span>
+                    </label>
+                  </fieldset>
+
+                  <p className="text-xs text-white/50 leading-relaxed">
+                    SMS consent is optional and is collected only through the
+                    checkboxes above — you can send your booking request
+                    without opting in, and declining texts does not affect
+                    your booking in any way. If you opt in, you will receive
+                    transactional messages — booking confirmations,
+                    appointment reminders, and follow-up alerts — and, only if
+                    separately selected, promotional/marketing messages, from
+                    Julian Morales. Message frequency may vary. Message and
+                    data rates may apply. Reply STOP to unsubscribe or HELP
+                    for help. Consent is not a condition of any purchase or
+                    service. See our{" "}
+                    <a
+                      href="/terms"
+                      className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
+                    >
+                      Terms of Service
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="/privacy"
+                      className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
+                    >
+                      Privacy Policy
+                    </a>
+                    . Mobile information is never shared with third parties
+                    for marketing purposes.
+                  </p>
+                </div>
               </form>
             )}
           </motion.div>
