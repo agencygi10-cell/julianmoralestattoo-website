@@ -130,4 +130,116 @@ body {
     border-color: rgba(212, 175, 55, 0.7);
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
   }
+
+  /* Editorial display type — for "JULIÁN MORALES" hero */
+  .display-mega {
+    font-family: var(--font-cinzel);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 0.88;
+    text-wrap: balance;
+  }
+
+  /* Gold outlined text (paint-order trick for crisp stroke) */
+  .text-outline-gold {
+    color: transparent;
+    -webkit-text-stroke: 1.5px #D4AF37;
+    paint-order: stroke fill;
+  }
+
+  /* Animated gold underline that draws in */
+  .underline-draw {
+    background-image: linear-gradient(90deg, #E8C97A, #D4AF37, #A88B2C);
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    transition: background-size 1.4s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .underline-draw.in {
+    background-size: 100% 2px;
+  }
+
+  /* Bento tile — premium gold-rim hover for portfolio teaser */
+  .bento-tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    background: #0a0a0a;
+    isolation: isolate;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.5s ease,
+                box-shadow 0.5s ease;
+  }
+  .bento-tile:hover {
+    border-color: rgba(212, 175, 55, 0.55);
+    box-shadow: 0 30px 60px -25px rgba(212, 175, 55, 0.45);
+    transform: translateY(-4px);
+  }
+  .bento-tile img {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.6s ease;
+  }
+  .bento-tile:hover img {
+    transform: scale(1.07);
+    filter: brightness(1.05) contrast(1.04);
+  }
+  /* Gold corner brackets revealed on hover */
+  .bento-tile::before,
+  .bento-tile::after {
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #D4AF37;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .bento-tile::before {
+    top: 12px;
+    left: 12px;
+    border-right: 0;
+    border-bottom: 0;
+    transform: translate(-6px, -6px);
+  }
+  .bento-tile::after {
+    bottom: 12px;
+    right: 12px;
+    border-left: 0;
+    border-top: 0;
+    transform: translate(6px, 6px);
+  }
+  .bento-tile:hover::before,
+  .bento-tile:hover::after {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* Marquee */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 3rem;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 80px,
+      #000 calc(100% - 80px),
+      transparent 100%
+    );
+  }
+  .marquee-track {
+    display: flex;
+    flex-shrink: 0;
+    gap: 3rem;
+    animation: marquee 35s linear infinite;
+    min-width: 100%;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+  }
 }

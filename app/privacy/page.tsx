@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ARTIST, FULL_ADDRESS } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Julián Morales Tattoo",
+  title: "Privacy Policy — Julian Morales Tattoo",
   description:
-    "Privacy Policy for Julián Morales Tattoo — how we collect, use, and protect your personal and SMS information.",
+    "Privacy Policy for Julian Morales Tattoo — how we collect, use, and protect your personal and SMS information.",
 };
 
 export default function PrivacyPage() {

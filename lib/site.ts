@@ -9,8 +9,8 @@
 export const SITE_URL = "https://julianmoralestattoo-website.vercel.app";
 
 export const ARTIST = {
-  name: "Julián Morales",
-  legalName: "Julián Morales",
+  name: "Julian Morales",
+  legalName: "Julian Morales",
   tagline: "Black & Gray Realism Tattoo Artist",
   email: "julianmtattoo23@gmail.com",
   phone: "+1 (408) 794-5667",
@@ -28,8 +28,6 @@ export const ARTIST = {
   social: {
     instagram: "https://www.instagram.com/julianmoralest_/",
     instagramHandle: "@julianmoralest_",
-    tiktok: "https://www.tiktok.com/@julianmoralestattoo",
-    tiktokHandle: "@julianmoralestattoo",
   },
   stats: {
     yearsExperience: "3+",

@@ -3,23 +3,6 @@ import { Instagram } from "lucide-react";
 import Logo from "./Logo";
 import { ARTIST } from "@/lib/site";
 
-const TIKTOK_ICON = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-  </svg>
-);
-
 const NAV = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -95,15 +78,6 @@ export default function Footer() {
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-gold/30 bg-brand-gold/5 text-brand-gold transition-all hover:border-brand-gold hover:bg-brand-gold/10"
               >
                 <Instagram size={18} />
-              </a>
-              <a
-                href={ARTIST.social.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-gold/30 bg-brand-gold/5 text-brand-gold transition-all hover:border-brand-gold hover:bg-brand-gold/10"
-              >
-                {TIKTOK_ICON}
               </a>
             </div>
           </div>

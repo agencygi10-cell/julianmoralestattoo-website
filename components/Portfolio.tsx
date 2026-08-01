@@ -26,7 +26,7 @@ const ITEMS: Item[] = [
   { src: "/portfolio/tattoo-01.webp", w: 1600, h: 2071, alt: "Christ portrait with crown of thorns — black & gray realism" },
   { src: "/portfolio/tattoo-10.jpg",  w: 1350, h: 1800, alt: "Roaring lion and rose forearm — black & gray realism" },
   { src: "/portfolio/tattoo-18.jpg",  w: 1350, h: 1800, alt: "Knight helmet and roses full sleeve — black & gray realism" },
-  { type: "video", src: "/videos/portfolio-jesus.mp4", w: 720, h: 1280, alt: "Process clip — Christ tattoo by Julián Morales" },
+  { type: "video", src: "/videos/portfolio-jesus.mp4", w: 720, h: 1280, alt: "Process clip — Christ tattoo by Julian Morales" },
   { src: "/portfolio/tattoo-15.jpg",  w: 1350, h: 1800, alt: "Medusa with serpents — black & gray realism" },
   { src: "/portfolio/tattoo-02.webp", w: 1600, h: 2071, alt: "Spartan helmet and lion shoulder piece — black & gray realism" },
   { src: "/portfolio/tattoo-11.jpg",  w: 1350, h: 1800, alt: "Pair of roses with filigree — black & gray forearm piece" },
@@ -41,25 +41,9 @@ const ITEMS: Item[] = [
   { src: "/portfolio/tattoo-08.jpeg", w: 388,  h: 642,  alt: "Eagle and horse with clock — sleeve detail" },
 ];
 
-export default function Portfolio({ light = false }: { light?: boolean }) {
-  const headingColor = light ? "text-brand-black" : "text-white";
-  const subtitleColor = light ? "text-brand-black/60" : "text-white/60";
-  const tileBorder = light ? "border-brand-black/15" : "border-brand-gold/15";
-  const ctaText = light ? "text-brand-black/60" : "text-white/60";
-
+export default function Portfolio() {
   return (
-    <section className={`relative pt-32 pb-20 lg:pt-36 lg:pb-24 ${light ? "bg-white text-brand-black" : ""}`}>
-      {light && (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-          }}
-        />
-      )}
-
+    <section className="relative pt-32 pb-20 lg:pt-36 lg:pb-24">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -69,10 +53,10 @@ export default function Portfolio({ light = false }: { light?: boolean }) {
           className="max-w-3xl"
         >
           <div className="eyebrow mb-4">Portfolio</div>
-          <h1 className={`font-display text-4xl sm:text-6xl font-bold leading-tight ${headingColor}`}>
+          <h1 className="font-display text-4xl sm:text-6xl font-bold leading-tight text-white">
             The full <span className="text-gold-gradient">archive</span>.
           </h1>
-          <p className={`mt-5 text-base sm:text-lg leading-relaxed ${subtitleColor}`}>
+          <p className="mt-5 text-base sm:text-lg leading-relaxed text-white/60">
             Every piece I&apos;ve documented — fresh and healed. Each tattoo
             here was a months-long conversation with a client about something
             that mattered.
@@ -87,9 +71,7 @@ export default function Portfolio({ light = false }: { light?: boolean }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.55, delay: (i % 3) * 0.06 }}
-              className={`group relative mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-xl border bg-brand-ink ${tileBorder} ${
-                light ? "shadow-xl" : ""
-              }`}
+              className="group relative mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-xl border border-brand-gold/15 bg-brand-ink"
             >
               {item.type === "video" ? (
                 <>
@@ -144,7 +126,7 @@ export default function Portfolio({ light = false }: { light?: boolean }) {
           transition={{ duration: 0.6 }}
           className="mt-14 text-center"
         >
-          <p className={`text-sm sm:text-base mb-6 ${ctaText}`}>
+          <p className="text-sm sm:text-base mb-6 text-white/60">
             Want a piece in this style?
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -162,11 +144,7 @@ export default function Portfolio({ light = false }: { light?: boolean }) {
               href={ARTIST.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all ${
-                light
-                  ? "border border-brand-black/25 text-brand-black/80 hover:border-brand-black hover:text-brand-black"
-                  : "btn-ghost"
-              }`}
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold"
             >
               <Instagram size={16} />
               See healed work on IG

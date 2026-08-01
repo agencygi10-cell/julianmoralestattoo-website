@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ARTIST, FULL_ADDRESS, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Julián Morales Tattoo",
+  title: "Terms of Service — Julian Morales Tattoo",
   description:
-    "Terms of Service for Julián Morales Tattoo — SMS messaging terms, services, deposits, and general terms.",
+    "Terms of Service for Julian Morales Tattoo — SMS messaging terms, services, deposits, and general terms.",
 };
 
 export default function TermsPage() {

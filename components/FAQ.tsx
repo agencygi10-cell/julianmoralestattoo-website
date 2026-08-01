@@ -8,19 +8,11 @@ import { ARTIST } from "@/lib/site";
 const ITEMS = [
   {
     q: "How do I book?",
-    a: "Fill out the contact form on this page with your idea, references if you have any, and the approximate size and placement. I respond within 48 hours.",
-  },
-  {
-    q: "Do you require a deposit?",
-    a: "Yes — a $100 non-refundable deposit secures your appointment date. The deposit applies toward the final session price.",
+    a: "Fill out the contact form on this page with your idea, references, and approximate size and placement — I respond within 48 hours. A $100 non-refundable deposit secures your date and applies toward the final session price. Appointments only — no walk-ins, since custom realism needs proper consultation and design time.",
   },
   {
     q: "What if I need to reschedule?",
     a: "No problem — life happens. Reschedule with at least 72 hours notice and we'll find a new slot together. We don't do cancellations, only reschedules. Your deposit moves with you to the new date.",
-  },
-  {
-    q: "Do you accept walk-ins?",
-    a: "No — appointments only. Custom realism work needs preparation; walk-in slots don't allow the design and consultation time the work deserves.",
   },
   {
     q: "How much does a piece cost?",
@@ -28,7 +20,7 @@ const ITEMS = [
   },
   {
     q: "How long does a session take?",
-    a: "Single sessions usually run 3–6 hours. Larger pieces — sleeves, back work, full chest — take 4 to 12 sessions spread over several months.",
+    a: "Single sessions run up to 6 hours. Larger pieces — sleeves, back work, full chest — take 4 to 12 sessions spread over several months.",
   },
   {
     q: "What styles do you specialize in?",
@@ -48,17 +40,11 @@ const ITEMS = [
   },
 ];
 
-export default function FAQ({ light = false }: { light?: boolean }) {
+export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
-  const sectionBorder = light ? "border-t border-black/10" : "border-t border-brand-gold/10";
-  const headingColor = light ? "text-brand-black" : "text-white";
-  const cardClass = light
-    ? "bg-brand-black border border-brand-gold/20 shadow-xl"
-    : "card-dark";
-
   return (
-    <section className={`relative py-16 sm:py-24 ${light ? "bg-white text-brand-black" : ""} ${sectionBorder}`}>
+    <section className="relative py-16 sm:py-24 border-t border-brand-gold/10">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -67,7 +53,7 @@ export default function FAQ({ light = false }: { light?: boolean }) {
           transition={{ duration: 0.6 }}
         >
           <div className="eyebrow mb-4">FAQ</div>
-          <h2 className={`font-display text-3xl sm:text-5xl font-bold leading-tight ${headingColor}`}>
+          <h2 className="font-display text-3xl sm:text-5xl font-bold leading-tight text-white">
             The questions{" "}
             <span className="text-gold-gradient">everyone asks</span>.
           </h2>
@@ -83,7 +69,7 @@ export default function FAQ({ light = false }: { light?: boolean }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: i * 0.04 }}
-                className={`overflow-hidden rounded-xl ${cardClass}`}
+                className="overflow-hidden rounded-xl card-dark"
               >
                 <button
                   type="button"
