@@ -558,8 +558,15 @@ export default function Contact() {
                         SMS consent is optional and is collected only through
                         the checkboxes above — you can send your booking
                         request without opting in, and declining texts does
-                        not affect your booking in any way. Consent is not a
-                        condition of any purchase or service. See our{" "}
+                        not affect your booking in any way. If you opt in, you
+                        will receive transactional messages — booking
+                        confirmations, appointment reminders, and follow-up
+                        alerts — and, only if separately selected,
+                        promotional/marketing messages, from Julian Morales.
+                        Message frequency may vary. Message and data rates may
+                        apply. Reply STOP to unsubscribe or HELP for help.
+                        Consent is not a condition of any purchase or service.
+                        See our{" "}
                         <a
                           href="/terms"
                           className="text-brand-gold underline decoration-brand-gold/40 underline-offset-4 hover:text-brand-gold-light"
